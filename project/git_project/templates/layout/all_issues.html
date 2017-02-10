@@ -1,0 +1,48 @@
+{% extends 'layout/base.html' %}
+
+{% block body %}
+
+    {% if all_issues %}
+        <h3>All Issues</h3>
+        <ul>
+            {% for issue in all_issues %}
+            <li><a href="#myModal" data-toggle="modal" data-target="#myModal">{{ issue.issue_title }}</a></li>
+                <div class="container">
+                      <div class="modal fade" id="myModal" role="dialog">
+                          <div class="modal-dialog modal-lg">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                      <h4 class="modal-title">Description for {{ issue.issue_title }}</h4>
+                                      <h4 class="modal-title">Issue for {{ issue.project.proj_title }}</h4>
+                                  </div>
+                                  <div class="modal-body">
+                                      <p>{{ issue.issue_desc }}</p>
+                                  </div>
+                                  <div class="modal-body">Created: {{ issue.issue_startdate }}
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                </div>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h3>You don't have any Issues!</h3>
+    {% endif %}
+    <div>
+        <button type="button" class="btn btn-primary">Created</button>
+        <button type="button" class="btn btn-default">Assigned</button>
+        <button type="button" class="btn btn-default">Mentioned</button>
+        <br><br>
+        <div class="panel panel-default">
+        <p>Aktivnosti  </p>
+            <br>
+            <br>
+        </div>
+    </div>
+
+{% endblock %}
