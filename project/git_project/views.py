@@ -68,6 +68,8 @@ def logout_view(request):
     logout(request)
     return render(request, "layout/index.html", {})
 
+def profile_view(request):
+    return render(request, "layout/profile.html", {})
 
 class IssueCreate(CreateView):
     label = Label.id

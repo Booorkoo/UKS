@@ -25,4 +25,6 @@ urlpatterns = [
     url(r'^profile/$', views.UserProjectView.as_view(), name='user_profile'),
 
     url(r'^profile/photo/$', views.CreateProfile.as_view(), name='add_photo'),
+
+    url(r'^profile/$', views.profile_view, name='profile'),
 ]

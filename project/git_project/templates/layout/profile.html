@@ -1,0 +1,53 @@
+{% extends 'layout/base.html' %}
+
+{% block body %}
+    {% if all_projects %}
+        <h3>All projects</h3>
+        <ul>
+            {% for project in all_projects %}
+            <li><a href="{% url 'git_project:detail' project.id %}">{{ project.proj_title }}</a></li>
+
+            {% if user.is_authenticated %}
+            <form action="{% url 'git_project:project_delete' project.id %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <input type="hidden" name="project_id" value="{{ project.id }}" />
+                <button type="submit" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="Delete Project">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </button>
+            </form>
+
+            <form action="{% url 'git_project:project_update' project.id %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <input type="hidden" name="project_id" value="{{ project.id }}" />
+                <button type="submit" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Project">
+                    <span class="glyphicon glyphicon-edit"></span>
+                </button>
+            </form>
+
+            <form action="{% url 'git_project:issue_add' project.id %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <input type="hidden" name="project_id" value="{{ project.id }}" />
+                <button type="submit" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="Add New Issue">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </form>
+            {% endif %}
+            {% endfor %}
+        </ul><br><br><br>
+    {% else %}
+        <h3>You don't have any projects!</h3>
+    {% endif %}
+    <div class="col-md-6">
+      <p>Popular repositories </p>
+    <div class="panel panel-default">
+        <p>ovdje idu popularni repozitorijumi </p>
+    </div>
+    </div>
+    <div class="col-md-6">
+      <p>Contribution activity  </p>
+    <div class="panel panel-default">
+        <p>Aktivnosti  </p>
+    </div>
+    </div>
+
+{% endblock %}

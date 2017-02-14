@@ -79,6 +79,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'DatabaseDjangoProject',
         'USER': 'postgres',
+        'PASSWORD':'nikola1985',
     }
 }
 

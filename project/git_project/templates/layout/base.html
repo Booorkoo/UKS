@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
@@ -19,7 +19,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{% url 'git_project:index' %}">Home page</a>
+            <a class="navbar-brand" href="{% url 'git_project:index' %}">TIM 4</a>
         </div>
         <div class="collapse navbar-collapse" id="topNavBar">
             <ul class="nav navbar-nav">
@@ -49,7 +49,7 @@
 
             <form class="navbar-form navbar-left" role="search" method="get" action="#">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="q" value="">
+                    <input type="text" class="form-control" name="q" value="" size="35">
                 </div>
                 <button type="submit" class="btn btn-default">Search</button>
             </form>
@@ -77,10 +77,15 @@
                     </a>
                 </li>
                 {% endif %}
+                <li class="">
+                        <a href="{% url 'git_project:profile' %}">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"> Profile </span>
+                            {{ user.username }}
+                        </a>
+                </li>
             </ul>
 
         </div>
-
     </div>
 </nav>
     <div class="container">
