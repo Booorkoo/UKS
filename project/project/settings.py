@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'git_project',
+    'git_project.apps.GitProjectConfig',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +55,7 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['/Users/Johny/projekat/UKS/Project/templates/'],
+        'DIRS': ['/templates/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'project_db',
+        'NAME': 'DatabaseDjangoProject',
         'USER': 'postgres',
     }
 }
@@ -116,12 +116,16 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
+# Static files (CSS, JavaScript, media)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_URL = '/Users/Johny/projekat/UKS/Project/static/'
+STATIC_URL = '/static/'
 
-STATICFILES_DIRS=[
-    os.path.join(BASE_DIR, "static"),
-    '/Users/Johny/projekat/UKS/Project/static/'
-]
+'''STATICFILES_DIRS=[
+    os.path.join(BASE_DIR, '/static/'),
+    '/static/',
+]'''
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+

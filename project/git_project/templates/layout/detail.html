@@ -1,0 +1,58 @@
+{% extends 'layout/base.html' %}
+{% block title %} Project Detail {% endblock %}
+{% block body %}
+
+<h1>Project title: <i>{{ project.proj_title }}</i></h1><br>
+<h4>Created: <i>{{ project.proj_start }}</i></h4>
+<h5>Description: <i>{{ project.proj_desc }}</i></h5><br><br>
+
+{% if error_msg %}
+
+    <p><strong>{{error_msg}}</strong></p>
+
+{% endif %}
+
+<form action="{% url 'git_project:detail' project.id %}" method="post">
+    {% csrf_token %}
+    {% for issue in project.issue_set.all %}
+            <a href="#myModal" data-toggle="modal" data-target="#myModal">{{ issue.issue_title }}</a></li>
+                <div class="container">
+                      <div class="modal fade" id="myModal" role="dialog">
+                          <div class="modal-dialog modal-lg">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                      <h4 class="modal-title">Description for <i>{{ issue.issue_title }}</i> of <i>{{ issue.project.proj_title }}</i></h4>
+                                  </div>
+                                  <div class="modal-body">
+                                      <p>{{ issue.issue_desc }}</p>
+                                  </div>
+                                  <div class="modal-body">Created: {{ issue.issue_startdate }}
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                </div>
+                <br>
+    {% endfor %}
+</form>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
