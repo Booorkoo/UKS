@@ -55,7 +55,11 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+
         'DIRS': ['/templates/'],
+
+        'DIRS': ['/Desktop/django/UKS/project/git_project/templates/'],
+
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,6 +83,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'DatabaseDjangoProject',
         'USER': 'postgres',
+        'PASSWORD':'nikola1985',
     }
 }
 
@@ -119,6 +124,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, media)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
+
 STATIC_URL = '/static/'
 
 '''STATICFILES_DIRS=[
@@ -128,4 +134,13 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+MEDIA_URL = '/media/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
+STATIC_URL = '/static/'
 

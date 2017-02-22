@@ -6,7 +6,7 @@
         <h3>All Issues</h3>
         <ul>
             {% for issue in all_issues %}
-            <li><a href="#myModal" data-toggle="modal" data-target="#myModal">{{ issue.issue_title }}</a></li>
+            <li><a href="#myModal" data-toggle="modal" data-target="#myModal">{{ issue.issue_title }}</a>
                 <div class="container">
                       <div class="modal fade" id="myModal" role="dialog">
                           <div class="modal-dialog modal-lg">
@@ -28,13 +28,17 @@
                           </div>
                       </div>
                 </div>
+                </li>
+            <b>Add comment</b>
+
+
+
             {% endfor %}
         </ul>
     {% else %}
         <h3>You don't have any Issues!</h3>
     {% endif %}
     <div>
-        <button type="button" class="btn btn-primary">Created</button>
         <button type="button" class="btn btn-default">Assigned</button>
         <button type="button" class="btn btn-default">Mentioned</button>
         <br><br>

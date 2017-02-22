@@ -68,6 +68,9 @@ def logout_view(request):
     logout(request)
     return render(request, "layout/index.html", {})
 
+def profile_view(request):
+    return render(request, "layout/profile.html", {})
+
 
 class IssueCreate(CreateView):
     label = Label.id
@@ -106,9 +109,16 @@ class UserProjectView(generic.ListView):
 class CreateProfile(CreateView):
     template_name = 'layout/add_photo.html'
     model = Profile
+
     fields = ['image', 'user']
     success_url = reverse_lazy('git_project:user_profile')
 
+
+
+    user = User.id
+
+    fields = ['image', 'user']
+    success_url = reverse_lazy('git_project:index')
 
 
 
