@@ -115,13 +115,6 @@ class CreateProfile(CreateView):
 
 
 
-    user = User.id
-
-    fields = ['image', 'user']
-    success_url = reverse_lazy('git_project:index')
-
-
-
 
 
 
