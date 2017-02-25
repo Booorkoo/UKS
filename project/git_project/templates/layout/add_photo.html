@@ -9,14 +9,18 @@
                     <h3>Add profile photo</h3>
                     <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
-                        {% include 'layout/form_template.html' %}
+                        {% if user.is_authenticated %}
+                        <label for="user"></label>
+                        <input id="user" type="hidden" name="user" value="{{ user.id }}" ><br>
+                        <label for="image">Chose your profile image: </label>
+                        <input id="image" type="file" name="image" >
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-success">Save Changes</button>
+                                <button type="submit" class="btn btn-success">Add Photo</button>
                             </div>
                         </div>
+                        {% endif %}
                     </form>
-
                 </div>
             </div>
         </div>

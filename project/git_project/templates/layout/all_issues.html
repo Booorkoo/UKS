@@ -29,7 +29,34 @@
                       </div>
                 </div>
                 </li>
-            <b>Add comment</b>
+
+
+            <!-- Post comments: -->
+
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal1">Comments</button>
+
+                      <div class="modal fade" id="myModal1" role="dialog">
+                          <div class="modal-dialog modal-lg">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                      <h4 class="modal-title">Description for {{ issue.issue_title }}</h4>
+                                      <h4 class="modal-title">Issue for {{ issue.project.proj_title }}</h4>
+                                  </div>
+                                  <div class="modal-body">
+                                      <p>{{ issue.issue_desc }}</p>
+                                  </div>
+                                  <div class="modal-body">Created: {{ issue.issue_startdate }}
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+            <button type="button" class="btn btn-default">Assigned</button>
+            <button type="button" class="btn btn-default">Commits</button>
 
 
 
@@ -39,8 +66,7 @@
         <h3>You don't have any Issues!</h3>
     {% endif %}
     <div>
-        <button type="button" class="btn btn-default">Assigned</button>
-        <button type="button" class="btn btn-default">Mentioned</button>
+
         <br><br>
         <div class="panel panel-default">
         <p>Aktivnosti  </p>

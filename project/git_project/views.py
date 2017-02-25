@@ -68,14 +68,11 @@ def logout_view(request):
     logout(request)
     return render(request, "layout/index.html", {})
 
-def profile_view(request):
-    return render(request, "layout/profile.html", {})
+'''def profile_view(request):
+    return render(request, "layout/profile.html", {})'''
 
 
 class IssueCreate(CreateView):
-    label = Label.id
-    project = Project.id
-
     template_name = 'layout/issue_form.html'
     model = Issue
     fields = ['project', 'issue_title', 'issue_desc', 'issue_opened', 'issue_completed', 'label']
@@ -92,8 +89,6 @@ class allIssuesView(generic.ListView):
 class HistoryProjectCreate(CreateView):
     template_name = 'layout/create_proj_history.html'
     model = ProjectHistory
-    project = Project.id
-    user = User.id
 
     fields = ['user', 'project', 'user_start_date']
     success_url = reverse_lazy('git_project:index')
@@ -109,9 +104,11 @@ class UserProjectView(generic.ListView):
 class CreateProfile(CreateView):
     template_name = 'layout/add_photo.html'
     model = Profile
+    fields = ['user', 'image']
+    success_url = reverse_lazy('git_project:index')
 
-    fields = ['image', 'user']
-    success_url = reverse_lazy('git_project:user_profile')
+
+
 
 
 

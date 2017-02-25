@@ -4,10 +4,8 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, )
-    image = models.FileField()
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.FileField(default=0)
+    image = models.FileField()
 
 class Project(models.Model):
     proj_title = models.CharField(max_length=32)
@@ -57,7 +55,9 @@ class ProjectHistory(models.Model):
     user_start_date = models.DateTimeField(default=timezone.now)
 
 class Comment(models.Model):
-    comment_body = models.CharField(max_length=512)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
+    issue = models.ForeignKey(Issue, on_delete=models.CASCADE, default=0)
+    comment_body = models.CharField(max_length=4096)
     comment_date = models.DateTimeField(default=timezone.now)
 
 class Commit(models.Model):

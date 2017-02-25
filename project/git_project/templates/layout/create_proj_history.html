@@ -9,14 +9,22 @@
 
                     <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
-                        {% include 'layout/form_template.html' %}
+
+
+                        <label for="user"></label>
+                        <input id="user" type="text" name="user" value="{{ user.id }}" ><br>
+                        <label for="project">Project title: </label>
+                        <input id="project" type="text" name="project" value="{{ project.proj_title }}" ><br>
+                        <label for="user_start_date">Start date: </label>
+                        <input id="user_start_date" type="date" name="user_start_date" value="{{ projectHistory.user_start_date }}" ><br>
+
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
                                 <button type="submit" class="btn btn-success">Submit</button>
                             </div>
                         </div>
-                    </form>
 
+                    </form>
                 </div>
             </div>
         </div>
