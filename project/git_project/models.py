@@ -8,6 +8,7 @@ class Profile(models.Model):
     image = models.FileField()
 
 class Project(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
     proj_title = models.CharField(max_length=32)
     proj_desc = models.CharField(max_length=1024)
     proj_start = models.DateTimeField(default=timezone.now)

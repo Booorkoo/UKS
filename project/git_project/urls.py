@@ -22,7 +22,7 @@ urlpatterns = [
 
     url(r'^project/add/confirm/$', views.HistoryProjectCreate.as_view(), name='confirm'),
 
-    url(r'^profile/$', views.UserProjectView.as_view(), name='user_profile'),
+    url(r'^profile/$', views.UserProfileProjectView.as_view(), name='user_profile'),
 
     url(r'^profile/photo/add/$', views.CreateProfile.as_view(), name='add_photo'),
 ]

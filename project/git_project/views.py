@@ -1,7 +1,7 @@
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
-from .models import Project, Issue, Label, ProjectHistory, Profile
+from .models import Project, Issue, Label,  Profile, ProjectHistory
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
@@ -17,6 +17,18 @@ class indexView(generic.ListView):
     def get_queryset(self):
         return Project.objects.all()
 
+
+
+class UserProfileProjectView(generic.ListView):
+    template_name = 'layout/user_profile.html'
+    context_object_name = 'all_user_projects'
+
+    def get_queryset(self):
+        return Project.objects.all()
+
+
+
+
 class detailView(generic.DetailView):
     model = Project
     template_name = 'layout/detail.html'
@@ -25,8 +37,8 @@ class ProjectCreate(CreateView):
     template_name = 'layout/project_form.html'
     model = Project
 
-    fields = ['proj_title', 'proj_desc', 'proj_completed']
-    success_url = reverse_lazy('git_project:confirm')
+    fields = ['user', 'proj_title', 'proj_desc', 'proj_completed']
+    success_url = reverse_lazy('git_project:user_profile')
 
 class ProjectUpdate(UpdateView):
     template_name = 'layout/project_form.html'
@@ -68,9 +80,6 @@ def logout_view(request):
     logout(request)
     return render(request, "layout/index.html", {})
 
-'''def profile_view(request):
-    return render(request, "layout/profile.html", {})'''
-
 
 class IssueCreate(CreateView):
     template_name = 'layout/issue_form.html'
@@ -94,12 +103,12 @@ class HistoryProjectCreate(CreateView):
     success_url = reverse_lazy('git_project:index')
 
 
-class UserProjectView(generic.ListView):
-    template_name = 'layout/user_profile.html'
-    context_object_name = 'userproject'
+#class UserProjectView(generic.ListView):
+    #template_name = 'layout/user_profile.html'
+    #context_object_name = 'userproject'
 
-    def get_queryset(self):
-        return ProjectHistory.objects.all()
+    #def get_queryset(self):
+        #return ProjectHistory.objects.all()
 
 class CreateProfile(CreateView):
     template_name = 'layout/add_photo.html'
