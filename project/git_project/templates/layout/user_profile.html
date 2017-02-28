@@ -16,7 +16,7 @@
                     <span class="glyphicon glyphicon-trash"></span>
                 </button>
             </form>
-            
+
             <form action="{% url 'git_project:project_update' project.id %}" method="post" style="display: inline;">
                 {% csrf_token %}
                 <input type="hidden" name="project_id" value="{{ project.id }}" />

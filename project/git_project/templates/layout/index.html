@@ -7,7 +7,7 @@
             {% for project in all_projects %}
             <li><a href="{% url 'git_project:detail' project.id %}">{{ project.proj_title }}</a></li>
 
-            {% if user.is_authenticated %}
+            {% if user.is_authenticated and user.id == project.user.id %}
             <form action="{% url 'git_project:project_delete' project.id %}" method="post" style="display: inline;">
                 {% csrf_token %}
                 <input type="hidden" name="project_id" value="{{ project.id }}" />
