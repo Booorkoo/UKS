@@ -1,0 +1,28 @@
+{% extends 'layout/base.html' %}
+{% block title %} Delete photo {% endblock %}
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>Delete profile photo</h3>
+                    <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% if user.is_authenticated %}
+                        <label for="user"></label>
+                        <input id="user" type="hidden" name="user" value="{{ user.id }}" ><br>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">Delete Photo</button>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

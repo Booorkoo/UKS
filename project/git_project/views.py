@@ -1,6 +1,10 @@
+from PIL import Image
+from django.http import HttpResponseRedirect
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse_lazy, reverse
+from pip._vendor.requests import delete
+
 from .models import Project, Issue, Label,  Profile, ProjectHistory
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
@@ -25,9 +29,6 @@ class UserProfileProjectView(generic.ListView):
 
     def get_queryset(self):
         return Project.objects.all()
-
-
-
 
 class detailView(generic.DetailView):
     model = Project
@@ -116,7 +117,10 @@ class CreateProfile(CreateView):
     fields = ['user', 'image']
     success_url = reverse_lazy('git_project:index')
 
-
+class ImageDelete(DeleteView):
+    template_name = 'layout/delete_photo.html'
+    model = Profile
+    success_url = reverse_lazy('git_project:index')
 
 
 

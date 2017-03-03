@@ -1,11 +1,24 @@
+import os
+
 from django.db import models
 from django.utils import timezone
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
+
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.FileField()
+
+    def delete(self, *args, **kwargs):
+        # You have to prepare what you need before delete the model
+        storage, path = self.image.storage, self.image.path
+        # Delete the model before the file
+        super(Profile, self).delete(*args, **kwargs)
+        # Delete the file after the model
+        storage.delete(path)
+
 
 class Project(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=0)

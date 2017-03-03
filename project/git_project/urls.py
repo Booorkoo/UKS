@@ -1,4 +1,6 @@
 from django.conf.urls import url
+
+from .views import ImageDelete
 from . import views
 
 app_name = 'git_project'
@@ -25,4 +27,7 @@ urlpatterns = [
     url(r'^profile/$', views.UserProfileProjectView.as_view(), name='user_profile'),
 
     url(r'^profile/photo/add/$', views.CreateProfile.as_view(), name='add_photo'),
+
+    url(r'^profile/photo/(?P<pk>[0-9]+)/delete/$', views.ImageDelete.as_view(), name='delete_photo'),
+
 ]
