@@ -1,7 +1,12 @@
+from django.http import HttpResponseRedirect
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
 from .models import Project, Issue, Label,  Profile, ProjectHistory, Comment, Role
+from django.core.urlresolvers import reverse_lazy, reverse
+from pip._vendor.requests import delete
+
+from .models import Project, Issue, Label,  Profile, ProjectHistory
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
@@ -28,9 +33,11 @@ class UserProfileProjectView(generic.ListView):
 
 
 
+
 #class detailView(generic.DetailView):
     #model = Project
     #template_name = 'layout/detail.html'
+
 
 class detailView(generic.DetailView):
     template_name = 'layout/detail.html'
@@ -129,6 +136,7 @@ class CreateProfile(CreateView):
     fields = ['user', 'image']
     success_url = reverse_lazy('git_project:index')
 
+
 class CommentListView(generic.ListView):
     template_name = 'layout/add_comment.html'
     context_object_name = 'all_comments'
@@ -152,6 +160,10 @@ class CreateRoleForUsers(CreateView):
 
 
 
+class ImageDelete(DeleteView):
+    template_name = 'layout/delete_photo.html'
+    model = Profile
+    success_url = reverse_lazy('git_project:index')
 
 
 

@@ -1,4 +1,6 @@
 from django.conf.urls import url
+
+from .views import ImageDelete
 from . import views
 
 app_name = 'git_project'
@@ -32,5 +34,7 @@ urlpatterns = [
     #izlistavanje komentara
     url(r'^issues/(?P<pk>[0-9]+)/comment/$', views.CommentListView.as_view(), name='all_comments'),
 
-    url(r'^issues/(?P<pk>[0-9]+)/comment/$', views.CreateComment.as_view(), name='add_comment')
+    url(r'^issues/(?P<pk>[0-9]+)/comment/$', views.CreateComment.as_view(), name='add_comment'),
+
+    url(r'^profile/photo/(?P<pk>[0-9]+)/delete/$', views.ImageDelete.as_view(), name='delete_photo'),
 ]

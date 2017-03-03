@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'git_project.apps.GitProjectConfig',
+    'django_cleanup',
 ]
 
 MIDDLEWARE = [

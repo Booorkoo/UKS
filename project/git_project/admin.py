@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from .models import Project, Issue, Label, Commit, Profile, Comment, RoleHistory, Role
 
 admin.site.register(Project)
