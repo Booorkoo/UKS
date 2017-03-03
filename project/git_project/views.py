@@ -1,7 +1,7 @@
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
-from .models import Project, Issue, Label,  Profile, ProjectHistory
+from .models import Project, Issue, Label,  Profile, ProjectHistory, Comment, Role
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
@@ -18,7 +18,6 @@ class indexView(generic.ListView):
         return Project.objects.all()
 
 
-
 class UserProfileProjectView(generic.ListView):
     template_name = 'layout/user_profile.html'
     context_object_name = 'all_user_projects'
@@ -29,9 +28,23 @@ class UserProfileProjectView(generic.ListView):
 
 
 
+#class detailView(generic.DetailView):
+    #model = Project
+    #template_name = 'layout/detail.html'
+
 class detailView(generic.DetailView):
-    model = Project
     template_name = 'layout/detail.html'
+    model = Project
+
+    def get_context_data(self, **kwargs):
+        """
+        This has been overridden to add `car` to the templates context,
+        so you can use {{ car }} etc. within the template
+        """
+        context = super(detailView, self).get_context_data(**kwargs)
+        context["all_roles"] = Role.objects.all()
+        return context
+
 
 class ProjectCreate(CreateView):
     template_name = 'layout/project_form.html'
@@ -115,6 +128,28 @@ class CreateProfile(CreateView):
     model = Profile
     fields = ['user', 'image']
     success_url = reverse_lazy('git_project:index')
+
+class CommentListView(generic.ListView):
+    template_name = 'layout/add_comment.html'
+    context_object_name = 'all_comments'
+
+    def get_queryset(self):
+        return Comment.objects.all()
+
+class CreateComment(CreateView):
+    template_name = 'layout/add_comment.html'
+    model = Comment
+    fields = ['comment_body', 'issue', 'user']
+    success_url = reverse_lazy('git_project:index')
+
+
+
+class CreateRoleForUsers(CreateView):
+    template_name = 'layout/add_role_for_user.html'
+    model = Role
+    fields = ['user', 'project', 'role_history']
+    success_url = reverse_lazy('git_project:index')
+
 
 
 

@@ -1,0 +1,36 @@
+{% extends 'layout/base.html' %}
+{% block title %} Add Comment {% endblock %}
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    {% if all_comments %}
+                    <h3>Add Comment</h3>
+                    {% for comment in all_comments %}
+                    <h3>Komentar: {{ comment.comment_body }}</h3>
+                    {% endfor %}
+                        {% endif %}
+                    <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% if user.is_authenticated %}
+                        <label for="comment_body">Comment:</label>
+                        <input id="comment_body" type="text" name="comment_body"><br>
+                        <label for="issue">Issue: </label>
+                        <input id="issue" type="text" name="issue"><br>
+                        <label for="user"></label>
+                        <input id="user" type="text" name="user" value="{{ user.id }}"><br>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">Add Comment</button>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

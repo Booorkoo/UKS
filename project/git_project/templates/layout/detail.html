@@ -5,6 +5,12 @@
 <h1>Project title: <i>{{ project.proj_title }}</i></h1><br>
 <h4>Created: <i>{{ project.proj_start }}</i></h4>
 <h5>Description: <i>{{ project.proj_desc }}</i></h5><br><br>
+<h4>Project assigned:</h4>
+{% for role in all_roles %}
+{% if project.id == role.project.id %}
+<h5> {{ role.user }} {{ role.role_history }} </h5>
+{% endif %}
+{% endfor %}
 
 {% if error_msg %}
 

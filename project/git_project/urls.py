@@ -10,6 +10,9 @@ urlpatterns = [
     url(r'project/(?P<pk>[0-9]+)/$', views.ProjectUpdate.as_view(), name='project_update'),
     url(r'project/(?P<pk>[0-9]+)/delete/$', views.ProjectDelete.as_view(), name='project_delete'),
 
+    #dodela korisnika projektu
+    url(r'^(?P<pk>[0-9]+)/users/$', views.CreateRoleForUsers.as_view(), name='users_for_project'),
+
     url(r'project/(?P<pk>[0-9]+)/add_issue/$', views.IssueCreate.as_view(), name='issue_add'),
 
     url(r'^issues/$', views.allIssuesView.as_view(), name='all_issues'),
@@ -25,4 +28,9 @@ urlpatterns = [
     url(r'^profile/$', views.UserProfileProjectView.as_view(), name='user_profile'),
 
     url(r'^profile/photo/add/$', views.CreateProfile.as_view(), name='add_photo'),
+
+    #izlistavanje komentara
+    url(r'^issues/(?P<pk>[0-9]+)/comment/$', views.CommentListView.as_view(), name='all_comments'),
+
+    url(r'^issues/(?P<pk>[0-9]+)/comment/$', views.CreateComment.as_view(), name='add_comment')
 ]

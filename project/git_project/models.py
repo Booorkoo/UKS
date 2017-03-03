@@ -40,9 +40,16 @@ class Issue(models.Model):
     def __str__(self):
         return self.issue_title
 
-#class Role(models.Model):
-    #role_name = models.CharField(max_length=32)
-    #role_desc = models.CharField(max_length=1024)
+class RoleHistory(models.Model):
+    role_name = models.CharField(max_length=32)
+
+    def __str__(self):
+        return self.role_name
+
+class Role(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    role_history = models.ForeignKey(RoleHistory, on_delete=models.CASCADE)
 
 #class User(models.Model):
     #role = models.ForeignKey(Role, on_delete=models.CASCADE, default=0)
