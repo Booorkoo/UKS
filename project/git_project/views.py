@@ -44,13 +44,13 @@ class detailView(generic.DetailView):
     model = Project
 
     def get_context_data(self, **kwargs):
-        """
-        This has been overridden to add `car` to the templates context,
-        so you can use {{ car }} etc. within the template
-        """
+
         context = super(detailView, self).get_context_data(**kwargs)
         context["all_roles"] = Role.objects.all()
         return context
+
+
+
 
 
 class ProjectCreate(CreateView):

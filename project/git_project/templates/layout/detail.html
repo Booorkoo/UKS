@@ -2,15 +2,31 @@
 {% block title %} Project Detail {% endblock %}
 {% block body %}
 
+
 <h1>Project title: <i>{{ project.proj_title }}</i></h1><br>
 <h4>Created: <i>{{ project.proj_start }}</i></h4>
 <h5>Description: <i>{{ project.proj_desc }}</i></h5><br><br>
+
+<div class="container">
+<h3 >Issues:</h3>
+{% for issue in project.issue_set.all %}
+{% if project.id == issue.project.id %}
+<h4>Issue title: <i><b>"{{ issue.issue_title }}"</b></i> created on <u>{{ issue.issue_startdate }}</u></h4>
+Issue description: <i>{{ issue.issue_desc }}</i><br><br>
+{% endif %}
+{% endfor %}
+</div><br><br>
+
+<div class="container">
 <h4>Project assigned:</h4>
 {% for role in all_roles %}
 {% if project.id == role.project.id %}
-<h5> {{ role.user }} {{ role.role_history }} </h5>
+<h5> User: {{ role.user }} is assigned as <i>{{ role.role_history }}</i></h5>
 {% endif %}
 {% endfor %}
+</div>
+
+
 
 {% if error_msg %}
 
@@ -18,33 +34,7 @@
 
 {% endif %}
 
-<form action="{% url 'git_project:detail' project.id %}" method="post">
-    {% csrf_token %}
-    {% for issue in project.issue_set.all %}
-            <a href="#myModal" data-toggle="modal" data-target="#myModal">{{ issue.issue_title }}</a></li>
-                <div class="container">
-                      <div class="modal fade" id="myModal" role="dialog">
-                          <div class="modal-dialog modal-lg">
-                              <div class="modal-content">
-                                  <div class="modal-header">
-                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                      <h4 class="modal-title">Description for <i>{{ issue.issue_title }}</i> of <i>{{ issue.project.proj_title }}</i></h4>
-                                  </div>
-                                  <div class="modal-body">
-                                      <p>{{ issue.issue_desc }}</p>
-                                  </div>
-                                  <div class="modal-body">Created: {{ issue.issue_startdate }}
-                                  </div>
-                                  <div class="modal-footer">
-                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                </div>
-                <br>
-    {% endfor %}
-</form>
+
 
 {% endblock %}
 
