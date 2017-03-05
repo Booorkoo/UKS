@@ -19,22 +19,24 @@ urlpatterns = [
 
     url(r'^issues/$', views.allIssuesView.as_view(), name='all_issues'),
 
+    url(r'issues/(?P<pk>[0-9]+)/detail/$', views.IssueDetailView.as_view(), name='issue_details'),
+
     url(r'^login/$', views.login_view, name='login'),
 
     url(r'^logout/$', views.logout_view, name='logout'),
 
     url(r'^register/$', views.register_view, name='register'),
 
-    url(r'^project/add/confirm/$', views.HistoryProjectCreate.as_view(), name='confirm'),
+    #url(r'^project/add/confirm/$', views.HistoryProjectCreate.as_view(), name='confirm'),
 
     url(r'^profile/$', views.UserProfileProjectView.as_view(), name='user_profile'),
 
     url(r'^profile/photo/add/$', views.CreateProfile.as_view(), name='add_photo'),
 
     #izlistavanje komentara
-    url(r'^issues/(?P<pk>[0-9]+)/comment/$', views.CommentListView.as_view(), name='all_comments'),
+    #url(r'^issues/(?P<pk>[0-9]+)/comment/$', views.CommentListView.as_view(), name='all_comments'),
 
-    url(r'^issues/(?P<pk>[0-9]+)/comment/$', views.CreateComment.as_view(), name='add_comment'),
+    url(r'^issues/(?P<pk>[0-9]+)/detail/comment/$', views.CreateComment.as_view(), name='add_comment'),
 
     url(r'^profile/photo/(?P<pk>[0-9]+)/delete/$', views.ImageDelete.as_view(), name='delete_photo'),
 ]

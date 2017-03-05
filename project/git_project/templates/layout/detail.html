@@ -7,17 +7,18 @@
 <h4>Created: <i>{{ project.proj_start }}</i></h4>
 <h5>Description: <i>{{ project.proj_desc }}</i></h5><br><br>
 
-<div class="container">
+<div class="container-fluid">
 <h3 >Issues:</h3>
 {% for issue in project.issue_set.all %}
 {% if project.id == issue.project.id %}
 <h4>Issue title: <i><b>"{{ issue.issue_title }}"</b></i> created on <u>{{ issue.issue_startdate }}</u></h4>
-Issue description: <i>{{ issue.issue_desc }}</i><br><br>
+Issue description: <i>{{ issue.issue_desc }}</i><br>
+<button>Comment</button><br><br>
 {% endif %}
 {% endfor %}
 </div><br><br>
 
-<div class="container">
+<div class="container-fluid">
 <h4>Project assigned:</h4>
 {% for role in all_roles %}
 {% if project.id == role.project.id %}

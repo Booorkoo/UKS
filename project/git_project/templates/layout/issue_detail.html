@@ -1,0 +1,54 @@
+{% extends 'layout/base.html' %}
+{% block title %} Issue Detail {% endblock %}
+
+<style>
+
+</style>
+
+{% block body %}
+
+<h2>Issue title: <i>{{ issue.issue_title }}</i></h2>
+<h3>Issue description: <i>{{ issue.issue_desc }}</i></h3><br>
+
+<div class="container-fluid">
+{% for comment in all_comments %}
+    {% if issue.id == comment.issue.id %}
+        <div style="background-color:#F7F1F1">
+            <h5>{{ comment.comment_body }}</h5>
+            <h6 align="right">Created by: <i><b>{{ comment.user.username }}</b></i> on: {{ comment.comment_date }}</h6>
+        </div>
+    {% endif %}
+{% endfor %}
+</div>
+    <form class="form-horizontal" action="{% url 'git_project:add_comment' issue.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% if user.is_authenticated %}
+        <textarea id="comment_body" name="comment_body" rows="5" cols="50"></textarea>
+        <input id="issue" type="hidden" name="issue" value="{{ issue.id }}">
+        <label for="user"></label>
+        <input id="user" type="hidden" name="user" value="{{ user.id }}">
+        <button type="submit" class="btn btn-success">Add Comment</button>
+        {% endif %}
+    </form>
+
+{% if error_msg %}
+
+    <p><strong>{{error_msg}}</strong></p>
+
+{% endif %}
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

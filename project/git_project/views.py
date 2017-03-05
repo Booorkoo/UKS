@@ -52,7 +52,6 @@ class detailView(generic.DetailView):
 
 
 
-
 class ProjectCreate(CreateView):
     template_name = 'layout/project_form.html'
     model = Project
@@ -63,7 +62,7 @@ class ProjectCreate(CreateView):
 class ProjectUpdate(UpdateView):
     template_name = 'layout/project_form.html'
     model = Project
-    fields = ['proj_title', 'proj_desc', 'proj_completed']
+    fields = ['user', 'proj_title', 'proj_desc', 'proj_completed']
 
 class ProjectDelete(DeleteView):
     template_name = 'layout/project_form.html'
@@ -115,12 +114,23 @@ class allIssuesView(generic.ListView):
     def get_queryset(self):
         return Issue.objects.all()
 
-class HistoryProjectCreate(CreateView):
-    template_name = 'layout/create_proj_history.html'
-    model = ProjectHistory
 
-    fields = ['user', 'project', 'user_start_date']
-    success_url = reverse_lazy('git_project:index')
+
+class IssueDetailView(generic.DetailView):
+    template_name = 'layout/issue_detail.html'
+    model = Issue
+
+    def get_context_data(self, **kwargs):
+        context = super(IssueDetailView, self).get_context_data(**kwargs)
+        context["all_comments"] = Comment.objects.all()
+        return context
+
+#class HistoryProjectCreate(CreateView):
+    #template_name = 'layout/create_proj_history.html'
+    #model = ProjectHistory
+
+    #fields = ['user', 'project', 'user_start_date']
+    #success_url = reverse_lazy('git_project:index')
 
 
 #class UserProjectView(generic.ListView):
@@ -145,10 +155,10 @@ class CommentListView(generic.ListView):
         return Comment.objects.all()
 
 class CreateComment(CreateView):
-    template_name = 'layout/add_comment.html'
+    template_name = 'layout/issue_detail.html'
     model = Comment
     fields = ['comment_body', 'issue', 'user']
-    success_url = reverse_lazy('git_project:index')
+    success_url = reverse_lazy('git_project:all_issues')
 
 
 
