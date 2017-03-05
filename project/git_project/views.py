@@ -147,6 +147,13 @@ class CreateProfile(CreateView):
     success_url = reverse_lazy('git_project:index')
 
 
+class UserProfileUpdate(UpdateView):
+    template_name = 'layout/user_profile_update.html'
+    model = User
+    fields = ['first_name', 'last_name', 'username', 'email']
+    success_url = reverse_lazy('git_project:user_profile')
+
+
 class CommentListView(generic.ListView):
     template_name = 'layout/add_comment.html'
     context_object_name = 'all_comments'

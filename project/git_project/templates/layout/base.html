@@ -93,7 +93,9 @@
                 <button type="submit" size="45" class="btn btn-default btn-block">Add Photo</button>
             </a>
             {% elif user.profile.image != None %}
-            <img src="{{ user.profile.image.url }}" height="250" width="250" />
+            <a href="{% url 'git_project:user_profile' %} ">
+                <img src="{{ user.profile.image.url }}" height="250" width="250" />
+            </a>
             <a href="{% url 'git_project:delete_photo' user.profile.id %}">
                 <button type="submit"  size="10" class="btn btn-default btn-block">Delete image</button>
             </a>

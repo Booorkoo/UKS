@@ -2,9 +2,26 @@
 
 {% block body %}
 
+    {% if user.is_authenticated %}
+    <div align="center" style="background-color:#F7F1F1">
+        <h4><b>User Data:</b></h4>
+        <h5>First name: <i>{{ user.first_name }}</i></h5>
+        <h5>Last name: <i>{{ user.last_name }}</i></h5>
+        <h5>E-mail address: <i>{{ user.email }}</i></h5>
+        <form action="{% url 'git_project:user_profile_update' user.id %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <input type="hidden" name="user_id" value="{{ user.id }}" />
+            <button type="submit" class="btn btn-info btn-block" data-toggle="tooltip" data-placement="top" title="Update profile">
+                <span class="glyphicon glyphicon-edit"></span>
+            </button>
+        </form>
+    </div>
+    {% endif %}
+
     {% if all_user_projects %}
         <h3>My Projects</h3>
         <ul>
+
             {% for project in all_user_projects %}
             {% if user.is_authenticated and user.id == project.user.id %}
             <li><a href="{% url 'git_project:detail' project.id %}">{{ project.proj_title }}</a></li>

@@ -33,6 +33,8 @@ urlpatterns = [
 
     url(r'^profile/photo/add/$', views.CreateProfile.as_view(), name='add_photo'),
 
+    url(r'^profile/(?P<pk>[0-9]+)/update/$', views.UserProfileUpdate.as_view(), name='user_profile_update'),
+
     #izlistavanje komentara
     #url(r'^issues/(?P<pk>[0-9]+)/comment/$', views.CommentListView.as_view(), name='all_comments'),
 
