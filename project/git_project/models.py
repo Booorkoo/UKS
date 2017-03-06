@@ -43,7 +43,7 @@ class Label(models.Model):
 
 class Issue(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE, default=0)
-    label = models.ForeignKey(Label, on_delete=models.CASCADE, default=0)
+    label = models.ForeignKey(Label, on_delete=models.CASCADE, default=1)
     issue_title = models.CharField(max_length=32)
     issue_desc = models.CharField(max_length=1024)
     issue_opened = models.BooleanField(default=True)

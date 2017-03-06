@@ -101,9 +101,9 @@ def logout_view(request):
 
 
 class IssueCreate(CreateView):
-    template_name = 'layout/issue_form.html'
+    template_name = 'layout/detail.html'
     model = Issue
-    fields = ['project', 'issue_title', 'issue_desc', 'issue_opened', 'issue_completed', 'label']
+    fields = ['project', 'issue_title', 'issue_desc', 'issue_opened', 'issue_completed']
     success_url = reverse_lazy('git_project:index')
 
 
@@ -113,8 +113,6 @@ class allIssuesView(generic.ListView):
 
     def get_queryset(self):
         return Issue.objects.all()
-
-
 
 class IssueDetailView(generic.DetailView):
     template_name = 'layout/issue_detail.html'

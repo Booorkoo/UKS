@@ -2,7 +2,6 @@
 {% block title %} Add a new Issue {% endblock %}
 {% block body %}
 <div class="container-fluid">
-
     <div class="row">
         <div class="col-sm-12 col-md-7">
             <div class="panel panel-default">
@@ -10,7 +9,7 @@
 
                     <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
-                        {% include 'layout/form_template.html' %}
+                        ID>{{ project.proj_title }}
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
                                 <button type="submit" class="btn btn-success">Submit</button>

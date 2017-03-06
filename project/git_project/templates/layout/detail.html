@@ -7,6 +7,27 @@
 <h4>Created: <i>{{ project.proj_start }}</i></h4>
 <h5>Description: <i>{{ project.proj_desc }}</i></h5><br><br>
 </div>
+<div class="container-fluid">
+    <a href="#demo" class="btn btn-info btn-block" data-toggle="collapse">Add New Issue</a>
+    <div id="demo" class="collapse" >
+        <form class="form-horizontal" action="{% url 'git_project:issue_add' project.id %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% if user.is_authenticated %}
+            <label for="project">Create new issue for "{{ project.proj_title }}"</label><br>
+            <input id="project" type="hidden" name="project" value="{{ project.id }}">
+            <label for="issue_title">Issue Title: </label>
+            <input id="issue_title" type="text" name="issue_title"><br>
+            <textarea id="issue_desc" name="issue_desc" rows="5" cols="50" placeholder="Issue description"></textarea><br>
+            <label for="issue_opened">Issue opened: </label>
+            <input type="radio" id="issue_opened" name="issue_opened"><br>
+            <label for="issue_completed">Issue Completed: </label>
+            <input id="issue_completed" type="number" name="issue_completed"><br>
+
+            <button type="submit" class="btn btn-success">Create Issue</button>
+            {% endif %}
+        </form>
+    </div>
+</div>
 
 <div class="container-fluid">
 <h3 >Issues:</h3>
@@ -27,7 +48,7 @@ Issue description: <i>{{ issue.issue_desc }}</i><br>
 <h4>Project assigned:</h4>
 {% for role in all_roles %}
 {% if project.id == role.project.id %}
-<div class="container-fluid" style="background-color: #C2C2C2"><h5> User: {{ role.user }} is assigned as <i>{{ role.role_history }}</i></h5></div>
+<div class="container-fluid" style="background-color: #C2C2C2"><h5> User: <b>{{ role.user }}</b> is assigned as <i>{{ role.role_history }}</i></h5></div>
 {% endif %}
 {% endfor %}
 </div>
