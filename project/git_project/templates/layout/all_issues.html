@@ -8,7 +8,7 @@
         <ul>
             {% for issue in all_issues %}
             {{ issue.project.proj_title }}
-            <div class="container">
+            <div class="container-fluid">
                 <h3 >Issues:</h3>
                 <h4>Issue title: <i><b><a href="{% url 'git_project:issue_details' issue.id %}" >"{{ issue.issue_title }}"</a></b></i> created on <u>{{ issue.issue_startdate }}</u></h4>
                 Issue description: <i>{{ issue.issue_desc }}</i><br>
@@ -16,13 +16,10 @@
             <!-- Post comments: -->
 
 
-            <a href="">
+            <a href="{% url 'git_project:issue_details' issue.id %}">
                 <button type="button" class="btn btn-default" >Comments</button>
             </a>
 
-
-
-            <button type="button" class="btn btn-default">Assigned</button>
             <button type="button" class="btn btn-default">Commits</button>
 
             <br><br>

@@ -2,27 +2,32 @@
 {% block title %} Project Detail {% endblock %}
 {% block body %}
 
-
+<div class="container-fluid" style="background-color: #F7F1F1">
 <h1>Project title: <i>{{ project.proj_title }}</i></h1><br>
 <h4>Created: <i>{{ project.proj_start }}</i></h4>
 <h5>Description: <i>{{ project.proj_desc }}</i></h5><br><br>
+</div>
 
 <div class="container-fluid">
 <h3 >Issues:</h3>
 {% for issue in project.issue_set.all %}
 {% if project.id == issue.project.id %}
-<h4>Issue title: <i><b>"{{ issue.issue_title }}"</b></i> created on <u>{{ issue.issue_startdate }}</u></h4>
+<h4>Issue title: <i><b><a href="{% url 'git_project:issue_details' issue.id %}" >"{{ issue.issue_title }}"</a></b></i> created on <u>{{ issue.issue_startdate }}</u></h4>
 Issue description: <i>{{ issue.issue_desc }}</i><br>
-<button>Comment</button><br><br>
+<a href="{% url 'git_project:issue_details' issue.id %}">
+    <button type="button" class="btn btn-default" >Comments</button>
+</a>
+<button type="button" class="btn btn-default">Commits</button>
+    <br><br>
 {% endif %}
 {% endfor %}
-</div><br><br>
+</div>
 
 <div class="container-fluid">
 <h4>Project assigned:</h4>
 {% for role in all_roles %}
 {% if project.id == role.project.id %}
-<h5> User: {{ role.user }} is assigned as <i>{{ role.role_history }}</i></h5>
+<div class="container-fluid" style="background-color: #C2C2C2"><h5> User: {{ role.user }} is assigned as <i>{{ role.role_history }}</i></h5></div>
 {% endif %}
 {% endfor %}
 </div>

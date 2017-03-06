@@ -173,7 +173,7 @@ class CreateRoleForUsers(CreateView):
     template_name = 'layout/add_role_for_user.html'
     model = Role
     fields = ['user', 'project', 'role_history']
-    success_url = reverse_lazy('git_project:index')
+    success_url = reverse_lazy('git_project:user_profile')
 
 
 
