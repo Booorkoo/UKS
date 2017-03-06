@@ -60,9 +60,9 @@ class ProjectCreate(CreateView):
     success_url = reverse_lazy('git_project:user_profile')
 
 class ProjectUpdate(UpdateView):
-    template_name = 'layout/project_form.html'
+    template_name = 'layout/project_update_form.html'
     model = Project
-    fields = ['user', 'proj_title', 'proj_desc', 'proj_completed']
+    fields = ['proj_desc', 'proj_completed']
 
 class ProjectDelete(DeleteView):
     template_name = 'layout/project_form.html'

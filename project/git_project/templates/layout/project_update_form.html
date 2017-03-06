@@ -1,0 +1,32 @@
+{% extends 'layout/base.html' %}
+{% block title %} Update Project {% endblock %}
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-10">
+        <div class="col-sm-12 col-md-9">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>Update {{project.proj_title }}</h3>
+                    <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% if user.is_authenticated %}
+                        <label for="user">Project created by: <i>{{ user.username }}</i> on <u>{{project.proj_start}}</u> </label><br>
+                        <label for="proj_desc">Project Description: </label>
+                        <textarea id="proj_desc" name="proj_desc" rows="5" cols="50" >{{ project.proj_desc }}</textarea><br>
+                        <label for="proj_completed">Project Completed: </label>
+                        <input type="number" id="proj_completed" name="proj_completed" value="{{ project.proj_completed }}"><br><br>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">Update</button>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
