@@ -64,11 +64,9 @@ class Role(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     role_history = models.ForeignKey(RoleHistory, on_delete=models.CASCADE)
 
-#class User(models.Model):
-    #role = models.ForeignKey(Role, on_delete=models.CASCADE, default=0)
-    #user_lastname = models.CharField(max_length=32)
-    #user_username = models.CharField(max_length=32)
-    #user_password = models.CharField(max_length=32)
+class Branch(models.Model):
+    branch_name = models.CharField(max_length=32)
+    branch_desc = models.CharField(max_length=1024, null=True, blank=True)
 
 class ProjectHistory(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE, default=0)
@@ -82,7 +80,9 @@ class Comment(models.Model):
     comment_date = models.DateTimeField(default=timezone.now)
 
 class Commit(models.Model):
-    commit_link = models.URLField(default="")
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, default=0)
+    branch = models.ForeignKey(Branch, on_delete=models.CASCADE, default=0)
+    commit_body = models.CharField(max_length=16384, default="")
     commit_date = models.DateTimeField(default=timezone.now)
 
 class IssueChange(models.Model):

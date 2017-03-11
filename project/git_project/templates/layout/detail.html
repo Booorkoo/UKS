@@ -5,7 +5,8 @@
 <div class="container-fluid" style="background-color: #F7F1F1">
 <h1>Project title: <i>{{ project.proj_title }}</i></h1><br>
 <h4>Created: <i>{{ project.proj_start }}</i></h4>
-<h5>Description: <i>{{ project.proj_desc }}</i></h5><br><br>
+<h5>Description: <i>{{ project.proj_desc }}</i></h5><br>
+<h5 align="right"><i>Project completed:</i> <b><a href="{% url 'git_project:project_update' project.id %}">{{ project.proj_completed }} %</a></b></h5><br>
 </div>
 <div class="container-fluid">
     <a href="#demo" class="btn btn-info btn-block" data-toggle="collapse">Add New Issue</a>
