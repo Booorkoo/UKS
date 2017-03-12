@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
-from .models import Project, Issue, Label,  Profile, ProjectHistory, Comment, Role
+from .models import Project, Issue, Label,  Profile, ProjectHistory, Comment, Role, Commit
 from django.core.urlresolvers import reverse_lazy, reverse
 from pip._vendor.requests import delete
 
@@ -47,6 +47,17 @@ class detailView(generic.DetailView):
 
         context = super(detailView, self).get_context_data(**kwargs)
         context["all_roles"] = Role.objects.all()
+        return context
+
+
+class ProjectCommit_detailView(generic.DetailView):
+    template_name = 'layout/project_commit_detail.html'
+    model = Project
+
+    def get_context_data(self, **kwargs):
+
+        context = super(ProjectCommit_detailView, self).get_context_data(**kwargs)
+        context["all_commits"] = Commit.objects.all()
         return context
 
 

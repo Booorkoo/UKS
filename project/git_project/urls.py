@@ -41,4 +41,7 @@ urlpatterns = [
     url(r'^issues/(?P<pk>[0-9]+)/detail/comment/$', views.CreateComment.as_view(), name='add_comment'),
 
     url(r'^profile/photo/(?P<pk>[0-9]+)/delete/$', views.ImageDelete.as_view(), name='delete_photo'),
+
+    url(r'project/(?P<pk>[0-9]+)/commits/$', views.ProjectCommit_detailView.as_view(), name='project_commit'),
+
 ]

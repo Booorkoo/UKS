@@ -68,6 +68,9 @@ class Branch(models.Model):
     branch_name = models.CharField(max_length=32)
     branch_desc = models.CharField(max_length=1024, null=True, blank=True)
 
+    def __str__(self):
+        return self.branch_name
+
 class ProjectHistory(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE, default=0)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
@@ -80,6 +83,7 @@ class Comment(models.Model):
     comment_date = models.DateTimeField(default=timezone.now)
 
 class Commit(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, default=0)
     branch = models.ForeignKey(Branch, on_delete=models.CASCADE, default=0)
     commit_body = models.CharField(max_length=16384, default="")

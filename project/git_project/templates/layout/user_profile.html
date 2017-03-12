@@ -29,7 +29,7 @@
             <form action="{% url 'git_project:project_delete' project.id %}" method="post" style="display: inline;">
                 {% csrf_token %}
                 <input type="hidden" name="project_id" value="{{ project.id }}" />
-                <button type="submit" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="Delete Project">
+                <button type="submit" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="Delete Project!">
                     <span class="glyphicon glyphicon-trash"></span>
                 </button>
             </form>
@@ -37,7 +37,7 @@
             <form action="{% url 'git_project:project_update' project.id %}" method="post" style="display: inline;">
                 {% csrf_token %}
                 <input type="hidden" name="project_id" value="{{ project.id }}" />
-                <button type="submit" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Project">
+                <button type="submit" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Project!">
                     <span class="glyphicon glyphicon-edit"></span>
                 </button>
             </form>
@@ -49,6 +49,10 @@
                     <span class="glyphicon glyphicon-user"></span>
                 </button>
             </form>
+
+            <a href="{% url 'git_project:project_commit' project.id %}">
+                <button class="btn btn-default btn-sm" title="All commits!">Commits</button>
+            </a>
             {% endif %}
             {% endfor %}
         </ul><br>

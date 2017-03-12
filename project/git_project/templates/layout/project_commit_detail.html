@@ -1,0 +1,15 @@
+{% extends 'layout/base.html' %}
+{% block title %} All Commits {% endblock %}
+{% block body %}
+<h4>All commits for "{{ project.proj_title }}" Project.</h4>
+
+{% for commit in all_commits %}
+{% if user.is_authenticated and user.id == commit.user.id %}
+
+{{ commit.commit_body }}
+{{ user.username }}
+
+{% endif %}
+{% endfor %}
+
+{% endblock %}
