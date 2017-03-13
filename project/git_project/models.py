@@ -86,8 +86,12 @@ class Commit(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, default=0)
     branch = models.ForeignKey(Branch, on_delete=models.CASCADE, default=0)
-    commit_body = models.CharField(max_length=16384, default="")
+    commit_title = models.CharField(max_length=64)
+    commit_body = models.CharField(max_length=16384)
     commit_date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.commit_title
 
 class IssueChange(models.Model):
     property_name = models.CharField(max_length=32)

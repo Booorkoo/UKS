@@ -1,15 +1,46 @@
 {% extends 'layout/base.html' %}
 {% block title %} All Commits {% endblock %}
+
+
 {% block body %}
-<h4>All commits for "{{ project.proj_title }}" Project.</h4>
 
-{% for commit in all_commits %}
+<div class="container-fluid" style="background-color: #F7F1F1; height: 100px">
+<h3 align="center">All commits for "{{ project.proj_title }}" Project.</h3>
+</div>
+<div class="container-fluid">
+<button type="button" class="btn btn-info btn-block" data-toggle="collapse" data-target="#demo">Add Commit</button>
+    <div id="demo" class="collapse">
+        <form class="form-horizontal" action="{% url 'git_project:commit_add' project.id %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% if user.is_authenticated %}
+            <label for="user">Commit create bu: {{ user.username }} </label>
+            <input id="user" type="hidden" name="user" value="{{ user.id }}"><br>
+            <label for="project">Commit for project: {{ project.proj_title }}</label>
+            <input id="project" type="hidden" name="project" value="{{ project.id }}"><br>
+            <label for="branch">Branch: </label>
+            <select id="branch" name="branch">
+                {% for branc in all_branches %}
+                <option value="{{ branc.id }}">{{ branc.branch_name }}</option>
+                {% endfor %}
+            </select><br>
+            <label for="commit_title">Commit Title: </label>
+            <input id="commit_title" type="text" name="commit_title" ><br>
+            <code><textarea id="commit_body" name="commit_body" rows="5" cols="50"></textarea></code><br>
+
+            <button type="submit" class="btn btn-success">Commit</button>
+            {% endif %}
+        </form>
+    </div>
+</div>
+<div style="border: 2px solid #F7F1F1; margin: 10px; padding: 10px; border-radius: 10px">
+{% for commit in project.commit_set.all %}
 {% if user.is_authenticated and user.id == commit.user.id %}
-
-{{ commit.commit_body }}
-{{ user.username }}
-
+<br>{{ commit.commit_title }}<br>
+{{ commit.commit_body }}<br>
+{{ user.username }}<br>
+    <button class="btn btn-default btn-sm">Update Commit</button>
 {% endif %}
 {% endfor %}
+</div>
 
 {% endblock %}

@@ -27,16 +27,11 @@ urlpatterns = [
 
     url(r'^register/$', views.register_view, name='register'),
 
-    #url(r'^project/add/confirm/$', views.HistoryProjectCreate.as_view(), name='confirm'),
-
     url(r'^profile/$', views.UserProfileProjectView.as_view(), name='user_profile'),
 
     url(r'^profile/photo/add/$', views.CreateProfile.as_view(), name='add_photo'),
 
     url(r'^profile/(?P<pk>[0-9]+)/update/$', views.UserProfileUpdate.as_view(), name='user_profile_update'),
-
-    #izlistavanje komentara
-    #url(r'^issues/(?P<pk>[0-9]+)/comment/$', views.CommentListView.as_view(), name='all_comments'),
 
     url(r'^issues/(?P<pk>[0-9]+)/detail/comment/$', views.CreateComment.as_view(), name='add_comment'),
 
@@ -44,4 +39,5 @@ urlpatterns = [
 
     url(r'project/(?P<pk>[0-9]+)/commits/$', views.ProjectCommit_detailView.as_view(), name='project_commit'),
 
+    url(r'project/(?P<pk>[0-9]+)/add_commit/$', views.CommitCreate.as_view(), name='commit_add'),
 ]

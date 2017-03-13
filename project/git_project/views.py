@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
-from .models import Project, Issue, Label,  Profile, ProjectHistory, Comment, Role, Commit
+from .models import Project, Issue, Label,  Profile, ProjectHistory, Comment, Role, Commit, Branch
 from django.core.urlresolvers import reverse_lazy, reverse
 from pip._vendor.requests import delete
 
@@ -57,10 +57,15 @@ class ProjectCommit_detailView(generic.DetailView):
     def get_context_data(self, **kwargs):
 
         context = super(ProjectCommit_detailView, self).get_context_data(**kwargs)
-        context["all_commits"] = Commit.objects.all()
+        context["all_branches"] = Branch.objects.all()
         return context
 
 
+class CommitCreate(CreateView):
+    template_name = 'layout/project_commit_detail.html'
+    model = Commit
+    fields = ['user', 'project', 'branch', 'commit_title', 'commit_body']
+    success_url = reverse_lazy('git_project:index')
 
 
 class ProjectCreate(CreateView):
