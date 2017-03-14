@@ -198,6 +198,21 @@ class ImageDelete(DeleteView):
 
 
 
+class BranchCreate(CreateView):
+    template_name = 'layout/create_branch.html'
+    model = Branch
+    fields = ['branch_name', 'branch_desc']
+    success_url = reverse_lazy('git_project:index')
+
+
+class CommitUpdate(UpdateView):
+    template_name = 'layout/update_commit.html'
+    model = Commit
+    fields = ['commit_title', 'commit_body']
+    success_url = reverse_lazy('git_project:user_profile')
+
+
+
 
 
 

@@ -1,0 +1,28 @@
+{% extends 'layout/base.html' %}
+{% block title %} Update Commit {% endblock %}
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-10">
+        <div class="col-sm-12 col-md-9">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>Update {{ commit.commit_title }}</h3>
+                    <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <label for="commit_title">Commit Title: </label>
+                        <input id="commit_title" type="text" name="commit_title"  value="{{ commit.commit_title }}"><br>
+                        <code><textarea id="commit_body" name="commit_body" rows="5" cols="50" >{{commit.commit_body}}</textarea></code><br>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">Update</button>
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

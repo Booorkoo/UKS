@@ -22,7 +22,11 @@
                 {% for branc in all_branches %}
                 <option value="{{ branc.id }}">{{ branc.branch_name }}</option>
                 {% endfor %}
-            </select><br>
+            </select>
+            <a href="{% url 'git_project:add_branch' %}">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </a>
+            <br>
             <label for="commit_title">Commit Title: </label>
             <input id="commit_title" type="text" name="commit_title" ><br>
             <code><textarea id="commit_body" name="commit_body" rows="5" cols="50"></textarea></code><br>
@@ -38,7 +42,7 @@
 <br>{{ commit.commit_title }}<br>
 {{ commit.commit_body }}<br>
 {{ user.username }}<br>
-    <button class="btn btn-default btn-sm">Update Commit</button>
+    <a href="{% url 'git_project:update_commit' commit.id %}"><button class="btn btn-default btn-sm">Update Commit</button></a>
 {% endif %}
 {% endfor %}
 </div>

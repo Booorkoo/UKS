@@ -40,4 +40,8 @@ urlpatterns = [
     url(r'project/(?P<pk>[0-9]+)/commits/$', views.ProjectCommit_detailView.as_view(), name='project_commit'),
 
     url(r'project/(?P<pk>[0-9]+)/add_commit/$', views.CommitCreate.as_view(), name='commit_add'),
+
+    url(r'project/commit/(?P<pk>[0-9]+)/update/$', views.CommitUpdate.as_view(), name='update_commit'),
+
+    url(r'^project/branch/add/$', views.BranchCreate.as_view(), name='add_branch'),
 ]
