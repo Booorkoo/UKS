@@ -1,3 +1,6 @@
+from django.contrib.auth.forms import PasswordChangeForm
+from django.core.checks import messages
+from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -8,7 +11,7 @@ from pip._vendor.requests import delete
 
 from .models import Project, Issue, Label,  Profile, ProjectHistory
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.views.generic import View
 from .forms import UserForm, UserRegisterForm
 from django.contrib.auth.models import User
@@ -211,7 +214,29 @@ class CommitUpdate(UpdateView):
     fields = ['commit_title', 'commit_body']
     success_url = reverse_lazy('git_project:user_profile')
 
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request,('Your password was successfully updated!'))
+            return redirect('git_project:index')
+        else:
+            messages.error(request,('Please correct the error below.'))
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'layout/change_password.html', {
+        'form': form
+})
 
+def search(request):
+    if 'q' in request.GET and request.GET['q']:
+        q = request.GET['q']
+        proj = Project.objects.filter(proj_title=q)
+        return render(request, 'layout/search_results.html', {'proj': proj, 'query': q})
+    else:
+        return HttpResponse('Please submit a search term.')
 
 
 

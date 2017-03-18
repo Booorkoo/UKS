@@ -1,5 +1,6 @@
 from django.conf.urls import url
 
+
 from .views import ImageDelete
 from . import views
 
@@ -44,4 +45,8 @@ urlpatterns = [
     url(r'project/commit/(?P<pk>[0-9]+)/update/$', views.CommitUpdate.as_view(), name='update_commit'),
 
     url(r'^project/branch/add/$', views.BranchCreate.as_view(), name='add_branch'),
+
+    url(r'^password/$', views.change_password, name='change_password'),
+
+    url(r'^search/$', views.search, name='search'),
 ]

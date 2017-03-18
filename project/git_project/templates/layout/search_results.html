@@ -1,0 +1,17 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Search{% endblock %}
+
+{% block body %}
+
+            {% if proj %}
+        <p>Found {{ proj|length }} proj{{ proj|pluralize }}.</p>
+        <ul>
+            {% for project in proj %}
+            <li>{{ project.proj_title }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No project matched your search criteria.</p>
+        {% endif %}
+{% endblock %}
