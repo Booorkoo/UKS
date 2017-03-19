@@ -233,7 +233,7 @@ def change_password(request):
 def search(request):
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
-        proj = Project.objects.filter(proj_title=q)
+        proj = Project.objects.filter(proj_title__icontains=q)
         return render(request, 'layout/search_results.html', {'proj': proj, 'query': q})
     else:
         return HttpResponse('Please submit a search term.')
