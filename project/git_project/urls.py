@@ -49,4 +49,6 @@ urlpatterns = [
     url(r'^password/$', views.change_password, name='change_password'),
 
     url(r'^search/$', views.search, name='search'),
+
+    url(r'^graph/$', views.weather_chart_view, name='graph'),
 ]

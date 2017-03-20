@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'git_project.apps.GitProjectConfig',
     'django_cleanup',
+    'chartit',
 ]
 
 MIDDLEWARE = [

@@ -10,12 +10,14 @@ from django.core.urlresolvers import reverse_lazy, reverse
 from pip._vendor.requests import delete
 
 from .models import Project, Issue, Label,  Profile, ProjectHistory
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.views.generic import View
 from .forms import UserForm, UserRegisterForm
 from django.contrib.auth.models import User
 from django.contrib import auth
+
+from chartit import Chart, DataPool
 
 
 class indexView(generic.ListView):
@@ -239,7 +241,44 @@ def search(request):
         return HttpResponse('Please submit a search term.')
 
 
+def weather_chart_view(request):
+    #Step 1: Create a DataPool with the data we want to retrieve.
+    weatherdata = \
+        DataPool(
+           series=
+            [{'options': {
+               'source': Commit.objects.all()},
+              'terms': [
+                'commit_title',
+                'project',
+                'commit_date']}
+             ])
 
+    #Step 2: Create the Chart object
+    cht = Chart(
+            datasource = weatherdata,
+            series_options =
+              [{'options':{
+                  'type': 'column',
+                  'stacking': False},
+                'terms':{
+                  'commit_title': [
+                    'project',
+                    'commit_date']
+                  }}],
+            chart_options =
+              {'title': {
+                   'text': 'Graph Commit'},
+               'xAxis': {
+                    'title': {
+                       'text': 'Month number'}},
+               'yAxis': {
+                    'title': {
+                        'text': 'DATE' }}})
+
+    #Step 3: Send the chart object to the template.
+    #render_to_response('app/graphs.html', {'issueschart': cht})
+    return render_to_response('layout/chart.html', {'weatherchart': cht})
 
 
 
