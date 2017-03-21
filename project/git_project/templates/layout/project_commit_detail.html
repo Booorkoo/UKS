@@ -31,7 +31,8 @@
             <input id="commit_title" type="text" name="commit_title" ><br>
             <code><textarea id="commit_body" name="commit_body" rows="5" cols="50"></textarea></code><br>
 
-            <button type="submit" class="btn btn-success">Commit</button>
+                <button type="submit"class="btn btn-success">Commit</button>
+
             {% endif %}
         </form>
     </div>
@@ -42,7 +43,7 @@
 <br>{{ commit.commit_title }}<br>
 {{ commit.commit_body }}<br>
 {{ user.username }}<br>
-    <a href="{% url 'git_project:update_commit' commit.id %}"><button class="btn btn-default btn-sm">Update Commit</button></a>
+    <button class="btn btn-default btn-sm">Update Commit</button>
 {% endif %}
 {% endfor %}
 </div>

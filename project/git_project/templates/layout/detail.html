@@ -27,7 +27,7 @@
             <input id="issue_title" type="text" name="issue_title"><br>
             <textarea id="issue_desc" name="issue_desc" rows="5" cols="50" placeholder="Issue description"></textarea><br>
             <label for="issue_opened">Issue opened: </label>
-            <input type="radio" id="issue_opened" name="issue_opened"><br>
+            <input type="checkbox" id="issue_opened" name="issue_opened"><br>
             <label for="issue_completed">Issue Completed: </label>
             <input id="issue_completed" type="number" name="issue_completed"><br>
 
@@ -46,7 +46,9 @@ Issue description: <i>{{ issue.issue_desc }}</i><br>
 <a href="{% url 'git_project:issue_details' issue.id %}">
     <button type="button" class="btn btn-default" >Comments</button>
 </a>
-<button type="button" class="btn btn-default">Commits</button>
+
+
+
     <br><br>
 {% endif %}
 {% endfor %}

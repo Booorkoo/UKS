@@ -1,22 +1,14 @@
 from django.contrib.auth.forms import PasswordChangeForm
 from django.core.checks import messages
-from django.http import HttpResponse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.core.urlresolvers import reverse_lazy
-from .models import Project, Issue, Label,  Profile, ProjectHistory, Comment, Role, Commit, Branch
+from .models import Project, Issue, Label,  Profile, ProjectHistory, Comment, Role, Commit, Branch, Profile
 from django.core.urlresolvers import reverse_lazy, reverse
-from pip._vendor.requests import delete
-
-from .models import Project, Issue, Label,  Profile, ProjectHistory
 from django.shortcuts import render, redirect, render_to_response
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
-from django.views.generic import View
 from .forms import UserForm, UserRegisterForm
 from django.contrib.auth.models import User
-from django.contrib import auth
-
 from chartit import Chart, DataPool
 
 
@@ -34,14 +26,6 @@ class UserProfileProjectView(generic.ListView):
 
     def get_queryset(self):
         return Project.objects.all()
-
-
-
-
-
-#class detailView(generic.DetailView):
-    #model = Project
-    #template_name = 'layout/detail.html'
 
 
 class detailView(generic.DetailView):
@@ -70,7 +54,14 @@ class CommitCreate(CreateView):
     template_name = 'layout/project_commit_detail.html'
     model = Commit
     fields = ['user', 'project', 'branch', 'commit_title', 'commit_body']
-    success_url = reverse_lazy('git_project:index')
+    #success_url = reverse_lazy('git_project:index')
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.request = None
+
+    def get_success_url(self):
+        # Redirect to previous url
+        return self.request.META.get('HTTP_REFERER', None)
 
 
 class ProjectCreate(CreateView):
@@ -88,7 +79,15 @@ class ProjectUpdate(UpdateView):
 class ProjectDelete(DeleteView):
     template_name = 'layout/project_form.html'
     model = Project
-    success_url = reverse_lazy('git_project:index')
+    #success_url = reverse_lazy('git_project:index')
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.request = None
+
+    def get_success_url(self):
+        # Redirect to previous url
+        return self.request.META.get('HTTP_REFERER', None)
 
 def login_view(request):
     title = "Login"
@@ -125,7 +124,31 @@ class IssueCreate(CreateView):
     template_name = 'layout/detail.html'
     model = Issue
     fields = ['project', 'issue_title', 'issue_desc', 'issue_opened', 'issue_completed']
-    success_url = reverse_lazy('git_project:index')
+    #success_url = reverse_lazy('git_project:index')
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.request = None
+
+    def get_success_url(self):
+        # Redirect to previous url
+        return self.request.META.get('HTTP_REFERER', None)
+
+
+class IssueUpdate(UpdateView):
+    template_name = 'layout/issue_detail.html'
+    model = Issue
+    fields = ['issue_title', 'issue_desc', 'issue_opened', 'issue_completed']
+    #success_url = reverse_lazy('git_project:user_profile')
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.request = None
+
+    def get_success_url(self):
+        # Redirect to previous url
+        return self.request.META.get('HTTP_REFERER', None)
+
 
 
 class allIssuesView(generic.ListView):
@@ -144,20 +167,6 @@ class IssueDetailView(generic.DetailView):
         context["all_comments"] = Comment.objects.all()
         return context
 
-#class HistoryProjectCreate(CreateView):
-    #template_name = 'layout/create_proj_history.html'
-    #model = ProjectHistory
-
-    #fields = ['user', 'project', 'user_start_date']
-    #success_url = reverse_lazy('git_project:index')
-
-
-#class UserProjectView(generic.ListView):
-    #template_name = 'layout/user_profile.html'
-    #context_object_name = 'userproject'
-
-    #def get_queryset(self):
-        #return ProjectHistory.objects.all()
 
 class CreateProfile(CreateView):
     template_name = 'layout/add_photo.html'
@@ -184,7 +193,28 @@ class CreateComment(CreateView):
     template_name = 'layout/issue_detail.html'
     model = Comment
     fields = ['comment_body', 'issue', 'user']
-    success_url = reverse_lazy('git_project:all_issues')
+    #success_url = reverse_lazy('git_project:all_issues')
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.request = None
+
+    def get_success_url(self):
+        # Redirect to previous url
+        return self.request.META.get('HTTP_REFERER', None)
+
+class CommentDelete(DeleteView):
+    template_name = 'layout/issue_detail.html'
+    model = Comment
+    #success_url = reverse_lazy('git_project:index')
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.request = None
+
+    def get_success_url(self):
+        # Redirect to previous url
+        return self.request.META.get('HTTP_REFERER', None)
 
 
 

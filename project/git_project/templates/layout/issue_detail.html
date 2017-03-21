@@ -8,11 +8,41 @@
 <h3>Issue description: <i>{{ issue.issue_desc }}</i></h3><br>
 </div>
 
+
+
+<div class="container-fluid">
+    <a href="#demo" class="btn btn-info btn-block" data-toggle="collapse">Update {{ issue.issue_title }}</a>
+    <div id="demo" class="collapse" >
+        <form class="form-horizontal" action="{% url 'git_project:issue_update' issue.pk %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% if user.is_authenticated %}
+            <label for="issue_title">Issue Title: </label>
+            <input id="issue_title" type="text" name="issue_title" value="{{issue.issue_title}}"><br>
+            <textarea id="issue_desc" name="issue_desc" rows="5" cols="50" placeholder="Issue description" >{{issue.issue_desc}}</textarea><br>
+            <label for="issue_opened">Issue opened: </label>
+            <input type="checkbox" id="issue_opened" name="issue_opened" value="{{issue.issue_opened}}"><br>
+            <label for="issue_completed">Issue Completed: </label>
+            <input id="issue_completed" type="number" name="issue_completed" value="{{issue.issue_completed}}"><br>
+
+            <button type="submit" class="btn btn-success">Update Issue</button>
+            {% endif %}
+        </form>
+    </div>
+</div>
+
 <div class="container-fluid">
 {% for comment in all_comments %}
     {% if issue.id == comment.issue.id %}
         <div style="background-color:#DFDFDF">
-            <h5>{{ comment.comment_body }}</h5>
+            <h5>{{ comment.comment_body }}
+            <form action="{% url 'git_project:comment_delete' comment.id %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <input type="hidden" name="comment_id" value="{{ comment.id }}" />
+                <button style="float: right;" type="submit" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="Delete Project">
+                    <span  class="glyphicon glyphicon-remove"></span>
+                </button>
+            </form>
+            </h5>
             <h6 align="right">Created by: <i><b>{{ comment.user.username }}</b></i> on: {{ comment.comment_date }}</h6>
         </div>
     {% endif %}

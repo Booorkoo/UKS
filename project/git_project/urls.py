@@ -22,6 +22,8 @@ urlpatterns = [
 
     url(r'issues/(?P<pk>[0-9]+)/detail/$', views.IssueDetailView.as_view(), name='issue_details'),
 
+    url(r'issues/(?P<pk>[0-9]+)/update/$', views.IssueUpdate.as_view(), name='issue_update'),
+
     url(r'^login/$', views.login_view, name='login'),
 
     url(r'^logout/$', views.logout_view, name='logout'),
@@ -35,6 +37,8 @@ urlpatterns = [
     url(r'^profile/(?P<pk>[0-9]+)/update/$', views.UserProfileUpdate.as_view(), name='user_profile_update'),
 
     url(r'^issues/(?P<pk>[0-9]+)/detail/comment/$', views.CreateComment.as_view(), name='add_comment'),
+
+    url(r'comment/(?P<pk>[0-9]+)/delete/$', views.CommentDelete.as_view(), name='comment_delete'),
 
     url(r'^profile/photo/(?P<pk>[0-9]+)/delete/$', views.ImageDelete.as_view(), name='delete_photo'),
 
