@@ -24,7 +24,7 @@
 
             {% for project in all_user_projects %}
             {% if user.is_authenticated and user.id == project.user.id %}
-            <li><a href="{% url 'git_project:detail' project.id %}">{{ project.proj_title }}</a></li>
+            <li><a href="{% url 'git_project:detail' project.id %}"><h4 style="font-family:Comic Sans MS;">{{ project.proj_title }}</h4></a></li>
 
             <form action="{% url 'git_project:project_delete' project.id %}" method="post" style="display: inline;">
                 {% csrf_token %}
