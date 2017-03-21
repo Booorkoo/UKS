@@ -35,6 +35,7 @@
     {% if issue.id == comment.issue.id %}
         <div style="background-color:#DFDFDF">
             <h5>{{ comment.comment_body }}
+                {% if user.is_authenticated and user.id == comment.user.id %}
             <form action="{% url 'git_project:comment_delete' comment.id %}" method="post" style="display: inline;">
                 {% csrf_token %}
                 <input type="hidden" name="comment_id" value="{{ comment.id }}" />
@@ -42,6 +43,7 @@
                     <span  class="glyphicon glyphicon-remove"></span>
                 </button>
             </form>
+                {% endif %}
             </h5>
             <h6 align="right">Created by: <i><b>{{ comment.user.username }}</b></i> on: {{ comment.comment_date }}</h6>
         </div>

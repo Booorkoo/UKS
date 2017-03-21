@@ -43,7 +43,9 @@
 <br>{{ commit.commit_title }}<br>
 {{ commit.commit_body }}<br>
 {{ user.username }}<br>
+<a href="{% url 'git_project:update_commit' commit.id %}">
     <button class="btn btn-default btn-sm">Update Commit</button>
+</a>
 {% endif %}
 {% endfor %}
 </div>
