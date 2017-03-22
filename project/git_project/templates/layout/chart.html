@@ -1,3 +1,6 @@
+{% extends 'layout/base.html' %}
+
+{% block body %}
 <head>
 <!-- code to include the highcharts and jQuery libraries goes here -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
@@ -8,6 +11,6 @@
 {% load chartit %}
 {{weatherchart|load_charts:"container" }}
 </head>
-<body>
+
 <div id='container'></div>
-</body>
+{% endblock %}

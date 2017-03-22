@@ -6,7 +6,7 @@
         <div class="col-sm-9 col-md-10">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h3>Log in </h3>
+                    <h3>LOG IN </h3><hr>
                     <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         {% include 'layout/form_template.html' %}
@@ -15,7 +15,12 @@
                                 <button type="submit" class="btn btn-success">LogIn</button>
                             </div>
                         </div>
-                        <a href="{% url 'git_project:register' %}">Register</a>
+                        <div align="center">
+                            <hr>
+                           <a href="{% url 'git_project:register' %}">Create an account</a>
+                            <hr>
+                        </div>
+
                     </form>
 
                 </div>

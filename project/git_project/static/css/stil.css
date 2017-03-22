@@ -1,15 +1,19 @@
 @charset "utf-8";
 /* CSS Document */
+@import url(https://fonts.googleapis.com/css?family=Lobster);
+@import url(https://fonts.googleapis.com/css?family=Lemonada);
+@import url(https://fonts.googleapis.com/css?family=Oswald);
 
  .meni {
+    color:white;
     text-decoration-color: white;
     background-color: #a00000;
-    font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-family: 'Oswald',serif;
  }
  .sajt {
 
    background-color: #eeeeee;
-   font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+   font-family: 'Oswald',serif;
  }
 
 

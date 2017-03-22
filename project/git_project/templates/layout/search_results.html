@@ -4,25 +4,25 @@
 
 {% block body %}
             {% if proj %}
-        <h3 style="font-family:Comic Sans MS;" >Found {{ proj|length }} project{{ proj|pluralize }}:</h3>
-        <ul>
+        <h3>Found {{ proj|length }} project{{ proj|pluralize }}:</h3>
+
             {% for project in proj %}
-            <li >
+
                 <a href="{% url 'git_project:detail' project.id %}" >
-                    <h4 style="font-family:Comic Sans MS;" >{{ project.proj_title }}</h4>
+                    <h4  >{{ project.proj_title }}</h4>
                 </a>
 
-            </li>
+
             {% endfor %}
-        </ul>
+
 <hr><br>
 <hr>
 <div class="col-md-8">
-    <h4 style="font-family:Comic Sans MS;">Basics about project:</h4>
-        <div class="ScrollStyle" style="border: 1px solid; background-color:#F7F1F1;">
+    <h4>Basics about project:</h4>
+        <div class="ScrollStyle" style="border: 1px solid; background-color:#F7F1F1">
             <p>
                 {% for project in proj %}
-                <b>{{project.proj_title}}</b> by <b>{{ project.user.username}}</b> created on: <u>{{project.proj_start}}</u><br><br>
+                <b> {{project.proj_title}}</b> by <b>{{ project.user.username}}</b> created on: <u>{{project.proj_start}}</u><br><br>
                 {% endfor %}
             </p>
         </div>

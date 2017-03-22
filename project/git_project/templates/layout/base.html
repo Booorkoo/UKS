@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="{% static 'css/stil.css' %}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body>
-    <nav class="navbar navbar-inverse">
+<body class="sajt">
+    <nav class="navbar navbar-default meni">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
@@ -19,13 +19,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{% url 'git_project:index' %}">Home page</a>
+            <a class="navbar-brand" href="{% url 'git_project:index' %}" style="color:white">TIM 4 FTN</a>
         </div>
         <div class="collapse navbar-collapse" id="topNavBar">
             <ul class="nav navbar-nav">
                 {% if user.is_authenticated %}
                 <li class="">
-                    <a href="{% url 'git_project:user_profile' %}">
+                    <a href="{% url 'git_project:user_profile' %}" style="color:white" >
                         <img src="{{ user.profile.image.url }}" height="25" width="25" /> &nbsp;
                         {{ user.username }}
 
@@ -33,14 +33,14 @@
                 </li>
                 {% endif %}
                 <li class="">
-                    <a href="{% url 'git_project:index' %}">
+                    <a href="{% url 'git_project:index' %}" style="color:white" >
                         <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> &nbsp;
                         Projects
                     </a>
                 </li>
                 {% if user.is_authenticated %}
                 <li class="">
-                    <a href="{% url 'git_project:all_issues' %}">
+                    <a href="{% url 'git_project:all_issues' %}" style="color:white" >
                         <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> &nbsp;
                         Issues
                     </a>
@@ -50,7 +50,7 @@
 
             <form class="navbar-form navbar-left" role="search" method="get" action=" {% url 'git_project:search' %}">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="q" value="">
+                    <input type="text" class="form-control" name="q" value="" size="35">
                 </div>
                 <button type="submit" class="btn btn-default">Search</button>
             </form>
@@ -58,21 +58,21 @@
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
                 <li class="">
-                    <a href="{% url 'git_project:project_add' %}">
+                    <a href="{% url 'git_project:project_add' %}" style="color:white" >
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> &nbsp;
                         Add Project
                     </a>
                 </li>
 
                 <li class="">
-                    <a href="{% url 'git_project:logout' %}">
+                    <a href="{% url 'git_project:logout' %}" style="color:white" >
                         <span class="glyphicon glyphicon-off" aria-hidden="true"></span> &nbsp;
                         LogOut
                     </a>
                 </li>
                 {% else %}
                 <li class="">
-                    <a href="{% url 'git_project:login' %}">
+                    <a href="{% url 'git_project:login' %}" style="color:white" >
                         <span class="glyphicon glyphicon-on" aria-hidden="true"></span> &nbsp;
                         Login
                     </a>
