@@ -3,9 +3,9 @@
 {% block body %}
     {% if all_projects %}
         <h3>All projects</h3>
-        <ul>
+
             {% for project in all_projects %}
-            <li><a href="{% url 'git_project:detail' project.id %}"><h4 style="font-family:Comic Sans MS;">{{ project.proj_title }}</h4></a></li>
+            <a href="{% url 'git_project:detail' project.id %}"><h4 >{{ project.proj_title }}</h4></a>
 
             {% if user.is_authenticated and user.id == project.user.id %}
             <form action="{% url 'git_project:project_delete' project.id %}" method="post" style="display: inline;">
@@ -41,7 +41,7 @@
             </a>
             {% endfor %}
 
-        </ul><br><br><br>
+        <br><br><br>
     {% else %}
         <h3>You don't have any projects!</h3>
     {% endif %}

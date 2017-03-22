@@ -1,3 +1,5 @@
+import time, datetime
+from datetime import datetime
 from django.contrib.auth.forms import PasswordChangeForm
 from django.core.checks import messages
 from django.http import HttpResponse, HttpResponseRedirect
@@ -56,7 +58,7 @@ class CommitCreate(CreateView):
     fields = ['user', 'project', 'branch', 'commit_title', 'commit_body']
     #success_url = reverse_lazy('git_project:index')
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+        super(CommitCreate, self).__init__(**kwargs)
         self.request = None
 
     def get_success_url(self):
@@ -82,7 +84,7 @@ class ProjectDelete(DeleteView):
     #success_url = reverse_lazy('git_project:index')
 
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+        super(ProjectDelete,self).__init__(**kwargs)
         self.request = None
 
     def get_success_url(self):
@@ -127,7 +129,7 @@ class IssueCreate(CreateView):
     #success_url = reverse_lazy('git_project:index')
 
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+        super(IssueCreate, self).__init__(**kwargs)
         self.request = None
 
     def get_success_url(self):
@@ -142,7 +144,7 @@ class IssueUpdate(UpdateView):
     #success_url = reverse_lazy('git_project:user_profile')
 
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+        super(IssueUpdate, self).__init__(**kwargs)
         self.request = None
 
     def get_success_url(self):
@@ -196,7 +198,7 @@ class CreateComment(CreateView):
     #success_url = reverse_lazy('git_project:all_issues')
 
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+        super(CreateComment, self).__init__(**kwargs)
         self.request = None
 
     def get_success_url(self):
@@ -209,7 +211,7 @@ class CommentDelete(DeleteView):
     #success_url = reverse_lazy('git_project:index')
 
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+        super(CommentDelete, self).__init__(**kwargs)
         self.request = None
 
     def get_success_url(self):
@@ -277,11 +279,13 @@ def weather_chart_view(request):
         DataPool(
            series=
             [{'options': {
-               'source': Commit.objects.all()},
+               'source': Commit.objects.order_by('-commit_date')},
               'terms': [
+                ('commit_date', lambda d: time.mktime(d.timetuple())),
                 'commit_title',
                 'project',
-                'commit_date']}
+                'user',
+                'branch']}
              ])
 
     #Step 2: Create the Chart object
@@ -289,12 +293,14 @@ def weather_chart_view(request):
             datasource = weatherdata,
             series_options =
               [{'options':{
-                  'type': 'column',
+                  'type': 'line',
                   'stacking': False},
                 'terms':{
-                  'commit_title': [
+                  'commit_date': [
                     'project',
-                    'commit_date']
+                    'commit_title',
+                    'user',
+                    'branch']
                   }}],
             chart_options =
               {'title': {
@@ -304,11 +310,12 @@ def weather_chart_view(request):
                        'text': 'Month number'}},
                'yAxis': {
                     'title': {
-                        'text': 'DATE' }}})
-
+                        'text': 'DATE' }}},
+    x_sortf_mapf_mts = (None, lambda i: datetime.fromtimestamp(i).strftime("%Y-%m-%d, %H:%M"), False))
     #Step 3: Send the chart object to the template.
     #render_to_response('app/graphs.html', {'issueschart': cht})
     return render_to_response('layout/chart.html', {'weatherchart': cht})
+
 
 
 
