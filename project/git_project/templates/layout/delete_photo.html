@@ -10,13 +10,12 @@
                     <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         {% if user.is_authenticated %}
+                        <h4>Please press the "Delete" button to confirm delete profile photo.</h4>
                         <label for="user"></label>
                         <input id="user" type="hidden" name="user" value="{{ user.id }}" ><br>
 
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
+                        <div class="form-group" align="center">
                                 <button type="submit" class="btn btn-success">Delete Photo</button>
-                            </div>
                         </div>
                         {% endif %}
                     </form>

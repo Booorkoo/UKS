@@ -5,7 +5,7 @@ from django.core.checks import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Project, Issue, Label,  Profile, ProjectHistory, Comment, Role, Commit, Branch, Profile
+from .models import Project, Issue, Label,  Profile, Comment, Role, Commit, Branch, Profile
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.shortcuts import render, redirect, render_to_response
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
@@ -245,8 +245,13 @@ class BranchCreate(CreateView):
 class CommitUpdate(UpdateView):
     template_name = 'layout/update_commit.html'
     model = Commit
-    fields = ['commit_title', 'commit_body']
+    def get_context_data(self, **kwargs):
+        context = super(CommitUpdate, self).get_context_data(**kwargs)
+        context["all_branches"] = Branch.objects.all()
+        return context
+    fields = ['commit_title', 'commit_body', 'branch']
     success_url = reverse_lazy('git_project:user_profile')
+
 
 def change_password(request):
     if request.method == 'POST':

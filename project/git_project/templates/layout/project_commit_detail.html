@@ -4,7 +4,7 @@
 
 {% block body %}
 
-<div class="container-fluid" style="background-color: #F7F1F1; height: 100px">
+<div class="container-fluid" style="background-color: #F7F1F1; height: 100px; 10px; border-radius: 20px;">
 <h3 align="center">All commits for "{{ project.proj_title }}" Project.</h3>
 </div>
 <div class="container-fluid">
@@ -37,7 +37,7 @@
         </form>
     </div>
 </div>
-<div style="border: 2px solid #F7F1F1; margin: 10px; padding: 10px; border-radius: 10px">
+<div style="border: 2px solid #F7F1F1; margin: 10px; padding: 10px; border-radius: 10px; background-color:#F7F1F1;">
 {% for commit in project.commit_set.all %}
 {% if user.is_authenticated and user.id == commit.user.id %}
 <br>{{ commit.commit_title }}<br>
@@ -46,6 +46,7 @@
 <a href="{% url 'git_project:update_commit' commit.id %}">
     <button class="btn btn-default btn-sm">Update Commit</button>
 </a>
+    <hr>
 {% endif %}
 {% endfor %}
 </div>

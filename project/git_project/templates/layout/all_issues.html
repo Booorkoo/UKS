@@ -3,39 +3,35 @@
 
 {% block body %}
 
-    {% if all_issues %}
-        <h3>All Issues</h3>
-        <ul>
-            {% for issue in all_issues %}
-            {{ issue.project.proj_title }}
-            <div class="container-fluid">
-                <h3 >Issues:</h3>
-                <h4>Issue title: <i><b><a href="{% url 'git_project:issue_details' issue.id %}" >"{{ issue.issue_title }}"</a></b></i> created on <u>{{ issue.issue_startdate }}</u></h4>
-                Issue description: <i>{{ issue.issue_desc }}</i><br>
-            </div>
-            <!-- Post comments: -->
-
-
-            <a href="{% url 'git_project:issue_details' issue.id %}">
-                <button type="button" class="btn btn-default" >Comments</button>
-            </a>
-
-
-            <br><br>
-
-            {% endfor %}
-        </ul>
-    {% else %}
-        <h3>There's no issues created!</h3>
-    {% endif %}
-    <div>
-
-        <br><br>
+{% if all_issues %}
+<div style="border: 2px solid #F7F1F1; margin: 10px; padding: 5px; border-radius: 20px; background-color:#F7F1F1;">
+    <h3 align="center">All Issues:</h3>
+</div><br><br>
+<ul>
+    {% for issue in all_issues %}
+    <div style="border: 2px solid #F7F1F1; margin: 10px; padding: 5px; border-radius: 10px; background-color:#E6F3EF;">
+    <h4><i>Issue <a href="{% url 'git_project:issue_details' issue.id %}" >"{{ issue.issue_title }}"</a> is an issue created for project {{ issue.project.proj_title }}.</i></h4>
+    <div class="container-fluid">
+        <h4>Issue title: <i><b><a href="{% url 'git_project:issue_details' issue.id %}" >"{{ issue.issue_title }}"</a></b></i> created on <u><i>{{ issue.issue_startdate }}</i></u></h4>
+        Issue description: <i>{{ issue.issue_desc }}</i><br>
+    </div>
+    <a href="{% url 'git_project:issue_details' issue.id %}">
+        <button type="button" class="btn btn-default" >Comments</button>
+    </a>
+    </div>
+    <hr>
+    <br>
+    {% endfor %}
+</ul>
+{% else %}
+<h3>There's no issues created!</h3>
+{% endif %}
+<div>
+    <br><br>
         <div class="panel panel-default">
         <p>Aktivnosti  </p>
-            <br>
-            <br>
+            <br><br>
         </div>
-    </div>
+</div>
 
 {% endblock %}

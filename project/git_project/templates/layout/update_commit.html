@@ -13,6 +13,12 @@
                         <label for="commit_title">Commit Title: </label>
                         <input id="commit_title" type="text" name="commit_title"  value="{{ commit.commit_title }}"><br>
                         <code><textarea id="commit_body" name="commit_body" rows="5" cols="50" >{{commit.commit_body}}</textarea></code><br>
+                        <label for="branch">Branch: </label>
+                        <select id="branch" name="branch">
+                        {% for branc in all_branches %}
+                            <option value="{{ branc.id }}">{{ branc.branch_name }}</option>
+                        {% endfor %}
+                        </select>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
                                 <button type="submit" class="btn btn-success">Update</button>

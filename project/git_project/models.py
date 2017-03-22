@@ -71,10 +71,7 @@ class Branch(models.Model):
     def __str__(self):
         return self.branch_name
 
-class ProjectHistory(models.Model):
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, default=0)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
-    user_start_date = models.DateTimeField(default=timezone.now)
+
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
@@ -93,18 +90,7 @@ class Commit(models.Model):
     def __str__(self):
         return self.commit_title
 
-class IssueChange(models.Model):
-    property_name = models.CharField(max_length=32)
-    old_value = models.CharField(max_length=32)
-    new_value = models.CharField(max_length=32)
 
-class HistoryItem(models.Model):
-    issue = models.ForeignKey(Issue, on_delete=models.CASCADE, default=0)
-    issue_change = models.ForeignKey(IssueChange, on_delete=models.CASCADE, default=0)
-    commit = models.ForeignKey(Commit, on_delete=models.CASCADE, default=0)
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, default=0)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
-    date_time = models.DateTimeField(default=timezone.now)
 
 
 
