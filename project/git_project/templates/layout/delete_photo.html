@@ -10,15 +10,19 @@
                     <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         {% if user.is_authenticated %}
-                        <h4>Please press the "Delete" button to confirm delete profile photo.</h4>
+                        <h4>Are You sure You want to delete Your profile photo!?</h4>
                         <label for="user"></label>
-                        <input id="user" type="hidden" name="user" value="{{ user.id }}" ><br>
-
-                        <div class="form-group" align="center">
-                                <button type="submit" class="btn btn-success">Delete Photo</button>
+                        <input id="user" type="hidden" name="user" value="{{ user.id }}" ><br><br>
+                        <div align="center">
+                            <button type="submit" class="btn btn-success btn-block">Yes</button>
                         </div>
                         {% endif %}
                     </form>
+                    <div align="center">
+                        <a href="{% url 'git_project:user_profile' %}">
+                            <button class="btn btn-danger btn-block">No</button>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

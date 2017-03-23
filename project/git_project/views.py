@@ -119,7 +119,7 @@ def register_view(request):
 
 def logout_view(request):
     logout(request)
-    return render(request, "layout/index.html", {})
+    return redirect('git_project:index')
 
 
 class IssueCreate(CreateView):

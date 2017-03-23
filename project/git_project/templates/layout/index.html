@@ -31,8 +31,9 @@
                     <span class="glyphicon glyphicon-user"></span>
                 </button>
             </form>
+            {% endif %}
 
-
+            {% if user.is_authenticated %}
             <a href="{% url 'git_project:graph'%}">
                 <button class="btn btn-default btn-sm" title="Chart!">Chart</button>
             </a>
@@ -40,6 +41,7 @@
                 <button class="btn btn-default btn-sm" title="All commits!">Commits</button>
             </a>
             {% endif %}
+
             {% endfor %}
 
         <br><br><br>

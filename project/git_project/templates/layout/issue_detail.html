@@ -9,7 +9,7 @@
 </div>
 
 
-
+{% if user.is_authenticated and user.id == issue.project.user.id%}
 <div class="container-fluid">
     <a href="#demo" class="btn btn-info btn-block" data-toggle="collapse">Update {{ issue.issue_title }}</a>
     <div id="demo" class="collapse" >
@@ -29,7 +29,7 @@
         </form>
     </div>
 </div>
-
+{% endif %}
 <div class="container-fluid">
 {% for comment in all_comments %}
     {% if issue.id == comment.issue.id %}
@@ -53,13 +53,13 @@
 
 
 
-    <form class="form-horizontal" action="{% url 'git_project:add_comment' issue.id %}" method="post" enctype="multipart/form-data">
+    <center><form class="form-horizontal" action="{% url 'git_project:add_comment' issue.id %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% if user.is_authenticated %}
-        <textarea id="comment_body" name="comment_body" rows="5" cols="50"></textarea>
+        <textarea id="comment_body" name="comment_body" rows="3" cols="100"></textarea>
         <input id="issue" type="hidden" name="issue" value="{{ issue.id }}">
         <label for="user"></label>
-        <input id="user" type="hidden" name="user" value="{{ user.id }}">
+        <input id="user" type="hidden" name="user" value="{{ user.id }}"><br>
 
 <script>
     $(document).ready(function() {
@@ -76,7 +76,7 @@
 </script>
         <input type="submit" value="Add Comment" class="btn btn-success">
         {% endif %}
-    </form>
+    </form></center>
 
 {% if error_msg %}
 

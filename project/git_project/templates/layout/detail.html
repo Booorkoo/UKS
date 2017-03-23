@@ -15,6 +15,8 @@
         <b>{{ project.proj_completed }} %</b>
     {% endif %}
 </div>
+{% for role in all_roles %}
+{% if user.is_authenticated and user.id == role.user.id and project.id == role.project.id %}
 <div class="container-fluid">
     <a href="#demo" class="btn btn-info btn-block" data-toggle="collapse">Add New Issue</a>
     <div id="demo" class="collapse" >
@@ -30,7 +32,6 @@
             <input type="checkbox" id="issue_opened" name="issue_opened"><br>
             <label for="issue_completed">Issue Completed: </label>
             <input id="issue_completed" type="number" name="issue_completed"><br>
-
 <script>
     $(document).ready(function() {
     $('input[type="submit"]').attr('disabled', true);
@@ -51,7 +52,8 @@
         </form>
     </div>
 </div>
-
+{% endif %}
+{% endfor %}
 <div class="container-fluid">
 <h3 >Issues:</h3>
 {% for issue in project.issue_set.all %}
