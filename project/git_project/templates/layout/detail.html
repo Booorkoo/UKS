@@ -31,7 +31,22 @@
             <label for="issue_completed">Issue Completed: </label>
             <input id="issue_completed" type="number" name="issue_completed"><br>
 
-            <button type="submit" class="btn btn-success">Create Issue</button>
+<script>
+    $(document).ready(function() {
+    $('input[type="submit"]').attr('disabled', true);
+    $('input[type="text"],input[type="number"],textarea').on('keyup',function() {
+        var textarea_value = $("#issue_desc").val();
+        var text_value = $('input[name="issue_title"]').val();
+        var number_value = $('input[name="issue_completed"]').val();
+        if(text_value != '' && textarea_value != '' && number_value != '') {
+            $('input[type="submit"]').attr('disabled' , false);
+        }else{
+            $('input[type="submit"]').attr('disabled' , true);
+        }
+    });
+    });
+</script>
+            <input type="submit" value="Create Issue" class="btn btn-success">
             {% endif %}
         </form>
     </div>

@@ -31,8 +31,21 @@
             <input id="commit_title" type="text" name="commit_title" ><br>
             <code><textarea id="commit_body" name="commit_body" rows="5" cols="50"></textarea></code><br>
 
-                <button type="submit"class="btn btn-success">Commit</button>
-
+<script>
+$(document).ready(function() {
+$('input[type="submit"]').attr('disabled', true);
+$('input[type="text"],textarea').on('keyup',function() {
+    var textarea_value = $("#commit_body").val();
+    var text_value = $('input[name="commit_title"]').val();
+    if(textarea_value != '' && text_value != '') {
+        $('input[type="submit"]').attr('disabled' , false);
+    }else{
+        $('input[type="submit"]').attr('disabled' , true);
+    }
+});
+});
+</script>
+            <input type="submit" value="Commit" class="btn btn-success">
             {% endif %}
         </form>
     </div>
@@ -40,11 +53,12 @@
 <div style="border: 2px solid #F7F1F1; margin: 10px; padding: 10px; border-radius: 10px; background-color:#F7F1F1;">
 {% for commit in project.commit_set.all %}
 {% if user.is_authenticated and user.id == commit.user.id %}
-<br>{{ commit.commit_title }}<br>
-{{ commit.commit_body }}<br>
-{{ user.username }}<br>
+<br><h4 align="center"><b><i>Commit title: {{ commit.commit_title }}</i></b></h4>
+    <h5>Commit body:</h5>
+<pre>{{ commit.commit_body }}</pre>
+<h5>Created by: <i>{{ user.username }}</i></h5>
 <a href="{% url 'git_project:update_commit' commit.id %}">
-    <button class="btn btn-default btn-sm">Update Commit</button>
+    <button class="btn btn-warning btn-sm">Update Commit</button>
 </a>
     <hr>
 {% endif %}

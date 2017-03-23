@@ -32,13 +32,14 @@
                 </button>
             </form>
 
-            {% endif %}
+
             <a href="{% url 'git_project:graph'%}">
                 <button class="btn btn-default btn-sm" title="Chart!">Chart</button>
             </a>
             <a href="{% url 'git_project:project_commit' project.id %}">
                 <button class="btn btn-default btn-sm" title="All commits!">Commits</button>
             </a>
+            {% endif %}
             {% endfor %}
 
         <br><br><br>

@@ -50,6 +50,9 @@
     {% endif %}
 {% endfor %}
 </div>
+
+
+
     <form class="form-horizontal" action="{% url 'git_project:add_comment' issue.id %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% if user.is_authenticated %}
@@ -57,7 +60,21 @@
         <input id="issue" type="hidden" name="issue" value="{{ issue.id }}">
         <label for="user"></label>
         <input id="user" type="hidden" name="user" value="{{ user.id }}">
-        <button type="submit" class="btn btn-success">Add Comment</button>
+
+<script>
+    $(document).ready(function() {
+    $('input[type="submit"]').attr('disabled', true);
+    $('textarea').on('keyup',function() {
+        var textarea_value = $("#comment_body").val();
+        if(textarea_value != '') {
+            $('input[type="submit"]').attr('disabled' , false);
+        }else{
+        $('input[type="submit"]').attr('disabled' , true);
+    }
+});
+});
+</script>
+        <input type="submit" value="Add Comment" class="btn btn-success">
         {% endif %}
     </form>
 
