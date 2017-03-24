@@ -280,10 +280,10 @@ def search(request):
 
 
 
-#View for chart
-def chart_view(request, pk):
+#view for chart
+def weather_chart_view(request, pk):
     #Step 1: Create a DataPool with the data we want to retrieve.
-    weatherdata = \
+    commit_data = \
         DataPool(
            series=
             [{'options': {
@@ -298,7 +298,7 @@ def chart_view(request, pk):
 
     #Step 2: Create the Chart object
     cht = Chart(
-            datasource = weatherdata,
+            datasource = commit_data,
             series_options =
               [{'options':{
                   'type': 'line',
