@@ -52,5 +52,5 @@ urlpatterns = [
 
     url(r'^search/$', views.search, name='search'),
 
-    url(r'^graph/$', views.weather_chart_view, name='graph'),
+    url(r'^graph/(?P<pk>[0-9]+)/$', views.weather_chart_view, name='graph'),
 ]

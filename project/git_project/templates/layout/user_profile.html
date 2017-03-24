@@ -4,14 +4,17 @@
 
     {% if user.is_authenticated %}
     <div align="center" style="background-color:#F7F1F1">
-        <h4><b>User Data:</b></h4>
-        <h5>First name: <i>{{ user.first_name }}</i></h5>
-        <h5>Last name: <i>{{ user.last_name }}</i></h5>
-        <h5>E-mail address: <i>{{ user.email }}</i></h5>
+        <h3><b>USER DATA</b></h3><hr>
+        <div align="left">
+            <h5>FIRST NAME: <b>{{ user.first_name }}</b></h5>
+            <h5>LAST NAME: <b>{{ user.last_name }}</b></h5>
+            <h5>E-MAIL ADDRESS: <b>{{ user.email }}</b></h5>
+        </div>
         <form action="{% url 'git_project:user_profile_update' user.id %}" method="post" style="display: inline;">
             {% csrf_token %}
             <input type="hidden" name="user_id" value="{{ user.id }}" />
-            <button type="submit" class="btn btn-info btn-block" data-toggle="tooltip" data-placement="top" title="Update profile">
+            <button type="submit" class="btn btn-primary btn-block" data-toggle="tooltip" data-placement="top" title="Update profile">
+                
                 <span class="glyphicon glyphicon-edit"></span>
             </button>
         </form>
@@ -24,7 +27,7 @@
 
             {% for project in all_user_projects %}
             {% if user.is_authenticated and user.id == project.user.id %}
-            <a href="{% url 'git_project:detail' project.id %}"><h4 style="font-family:Comic Sans MS;">{{ project.proj_title }}</h4></a>
+            <a href="{% url 'git_project:detail' project.id %}"><h4>{{ project.proj_title }}</h4></a>
 
             <form action="{% url 'git_project:project_delete' project.id %}" method="post" style="display: inline;">
                 {% csrf_token %}
@@ -50,7 +53,7 @@
                 </button>
             </form>
 
-            <a href="{% url 'git_project:graph'%}">
+            <a href="{% url 'git_project:graph' project.id %}">
                 <button class="btn btn-default btn-sm" title="Chart!">Chart</button>
             </a>
 

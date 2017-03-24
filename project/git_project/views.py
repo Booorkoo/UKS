@@ -278,7 +278,9 @@ def search(request):
         return HttpResponse('Please submit a search term.')
 
 
-def weather_chart_view(request):
+
+
+def weather_chart_view(request, pk):
     #Step 1: Create a DataPool with the data we want to retrieve.
     weatherdata = \
         DataPool(
@@ -303,19 +305,18 @@ def weather_chart_view(request):
                 'terms':{
                   'commit_date': [
                     'project',
-                    'commit_title',
                     'user',
                     'branch']
                   }}],
             chart_options =
               {'title': {
-                   'text': 'Graph Commit'},
+                   'text': 'Project chart'},
                'xAxis': {
                     'title': {
-                       'text': 'Month number'}},
+                       'text': 'DATE'}},
                'yAxis': {
                     'title': {
-                        'text': 'DATE' }}},
+                        'text': 'User/Project/Branch' }}},
     x_sortf_mapf_mts = (None, lambda i: datetime.fromtimestamp(i).strftime("%Y-%m-%d, %H:%M"), False))
     #Step 3: Send the chart object to the template.
     #render_to_response('app/graphs.html', {'issueschart': cht})

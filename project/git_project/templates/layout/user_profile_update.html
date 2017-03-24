@@ -7,25 +7,26 @@
         <div class="col-sm-12 col-md-9">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h3>Update Profile</h3>
-                    <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                    <h3 align="center">Update Profile</h3><hr>
+                    <form class="form-horizontal forme" action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         {% if user.is_authenticated %}
                         <label for="first_name">First Name: </label>
-                        <input id="first_name" type="text" name="first_name" value="{{ user.first_name }}"><br>
+                        <input id="first_name" size="40" type="text" name="first_name" value="{{ user.first_name }}"><br>
                         <label for="last_name">Last Name: </label>
-                        <input id="last_name" type="text" name="last_name" value="{{ user.last_name }}"><br>
+                        <input id="last_name" size="40" type="text" name="last_name" value="{{ user.last_name }}"><br>
                         <label for="username">Username: </label>
-                        <input id="username" type="text" name="username" value="{{ user.username }}"><br>
+                        <input id="username" size="40" type="text" name="username" value="{{ user.username }}"><br>
                         <label for="email">E-mail: </label>
-                        <input id="email" type="text" name="email" value="{{ user.email }}"><br>
+                        <input id="email" size="40" type="text" name="email" value="{{ user.email }}"><br>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-success">Update Profile</button>
+                                <button type="submit" class="btn btn-primary">Update Profile</button>
                             </div>
                         </div>
                         {% endif %}
                     </form>
+                    <hr>
                     <div>
                         <a href="{% url 'git_project:change_password' %}">
                         <span class="glyphicon glyphicon-off" aria-hidden="true"></span> &nbsp;
