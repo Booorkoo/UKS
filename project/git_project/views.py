@@ -13,7 +13,7 @@ from .forms import UserForm, UserRegisterForm
 from django.contrib.auth.models import User
 from chartit import Chart, DataPool
 
-
+#View for home page
 class indexView(generic.ListView):
     template_name = 'layout/index.html'
     context_object_name = 'all_projects'
@@ -21,7 +21,7 @@ class indexView(generic.ListView):
     def get_queryset(self):
         return Project.objects.all()
 
-
+#View for user profile project
 class UserProfileProjectView(generic.ListView):
     template_name = 'layout/user_profile.html'
     context_object_name = 'all_user_projects'
@@ -29,7 +29,7 @@ class UserProfileProjectView(generic.ListView):
     def get_queryset(self):
         return Project.objects.all()
 
-
+#View for detail
 class detailView(generic.DetailView):
     template_name = 'layout/detail.html'
     model = Project
@@ -40,7 +40,7 @@ class detailView(generic.DetailView):
         context["all_roles"] = Role.objects.all()
         return context
 
-
+#View for project commit detail
 class ProjectCommit_detailView(generic.DetailView):
     template_name = 'layout/project_commit_detail.html'
     model = Project
@@ -51,7 +51,7 @@ class ProjectCommit_detailView(generic.DetailView):
         context["all_branches"] = Branch.objects.all()
         return context
 
-
+#View for commit create
 class CommitCreate(CreateView):
     template_name = 'layout/project_commit_detail.html'
     model = Commit
@@ -65,7 +65,7 @@ class CommitCreate(CreateView):
         # Redirect to previous url
         return self.request.META.get('HTTP_REFERER', None)
 
-
+#View for create project
 class ProjectCreate(CreateView):
     template_name = 'layout/project_form.html'
     model = Project
@@ -73,11 +73,12 @@ class ProjectCreate(CreateView):
     fields = ['user', 'proj_title', 'proj_desc', 'proj_completed']
     success_url = reverse_lazy('git_project:user_profile')
 
+#View for project update
 class ProjectUpdate(UpdateView):
     template_name = 'layout/project_update_form.html'
     model = Project
     fields = ['proj_desc', 'proj_completed']
-
+#View for delete project
 class ProjectDelete(DeleteView):
     template_name = 'layout/project_form.html'
     model = Project
@@ -121,7 +122,7 @@ def logout_view(request):
     logout(request)
     return redirect('git_project:index')
 
-
+#View for create issue
 class IssueCreate(CreateView):
     template_name = 'layout/detail.html'
     model = Issue
@@ -136,7 +137,7 @@ class IssueCreate(CreateView):
         # Redirect to previous url
         return self.request.META.get('HTTP_REFERER', None)
 
-
+#View for update issue
 class IssueUpdate(UpdateView):
     template_name = 'layout/issue_detail.html'
     model = Issue
@@ -152,14 +153,14 @@ class IssueUpdate(UpdateView):
         return self.request.META.get('HTTP_REFERER', None)
 
 
-
+#View for all issues view
 class allIssuesView(generic.ListView):
     template_name = 'layout/all_issues.html'
     context_object_name = 'all_issues'
 
     def get_queryset(self):
         return Issue.objects.all()
-
+#View for issues detail
 class IssueDetailView(generic.DetailView):
     template_name = 'layout/issue_detail.html'
     model = Issue
@@ -169,28 +170,28 @@ class IssueDetailView(generic.DetailView):
         context["all_comments"] = Comment.objects.all()
         return context
 
-
+#View for create profile
 class CreateProfile(CreateView):
     template_name = 'layout/add_photo.html'
     model = Profile
     fields = ['user', 'image']
     success_url = reverse_lazy('git_project:index')
 
-
+#View for user profil update
 class UserProfileUpdate(UpdateView):
     template_name = 'layout/user_profile_update.html'
     model = User
     fields = ['first_name', 'last_name', 'username', 'email']
     success_url = reverse_lazy('git_project:user_profile')
 
-
+#View for list comments
 class CommentListView(generic.ListView):
     template_name = 'layout/add_comment.html'
     context_object_name = 'all_comments'
 
     def get_queryset(self):
         return Comment.objects.all()
-
+#View for create coment
 class CreateComment(CreateView):
     template_name = 'layout/issue_detail.html'
     model = Comment
@@ -204,7 +205,7 @@ class CreateComment(CreateView):
     def get_success_url(self):
         # Redirect to previous url
         return self.request.META.get('HTTP_REFERER', None)
-
+#View for coment delete
 class CommentDelete(DeleteView):
     template_name = 'layout/issue_detail.html'
     model = Comment
@@ -219,7 +220,7 @@ class CommentDelete(DeleteView):
         return self.request.META.get('HTTP_REFERER', None)
 
 
-
+#View for create role for users
 class CreateRoleForUsers(CreateView):
     template_name = 'layout/add_role_for_user.html'
     model = Role
@@ -227,21 +228,21 @@ class CreateRoleForUsers(CreateView):
     success_url = reverse_lazy('git_project:user_profile')
 
 
-
+#View for delete image
 class ImageDelete(DeleteView):
     template_name = 'layout/delete_photo.html'
     model = Profile
     success_url = reverse_lazy('git_project:index')
 
 
-
+#View for create branch
 class BranchCreate(CreateView):
     template_name = 'layout/create_branch.html'
     model = Branch
     fields = ['branch_name', 'branch_desc']
     success_url = reverse_lazy('git_project:index')
 
-
+#View for update commit
 class CommitUpdate(UpdateView):
     template_name = 'layout/update_commit.html'
     model = Commit
@@ -252,7 +253,7 @@ class CommitUpdate(UpdateView):
     fields = ['commit_title', 'commit_body', 'branch']
     success_url = reverse_lazy('git_project:user_profile')
 
-
+#View for change password
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
@@ -268,7 +269,7 @@ def change_password(request):
     return render(request, 'layout/change_password.html', {
         'form': form
 })
-
+#View for search
 def search(request):
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
@@ -279,7 +280,7 @@ def search(request):
 
 
 
-
+#View for chart
 def weather_chart_view(request, pk):
     #Step 1: Create a DataPool with the data we want to retrieve.
     weatherdata = \
