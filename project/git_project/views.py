@@ -281,7 +281,7 @@ def search(request):
 
 
 #View for chart
-def weather_chart_view(request, pk):
+def chart_view(request, pk):
     #Step 1: Create a DataPool with the data we want to retrieve.
     weatherdata = \
         DataPool(

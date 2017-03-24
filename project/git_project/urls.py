@@ -56,5 +56,5 @@ urlpatterns = [
     # Redirect to search
     url(r'^search/$', views.search, name='search'),
     #Show graf for project ID
-    url(r'^graph/(?P<pk>[0-9]+)/$', views.weather_chart_view, name='graph'),
+    url(r'^graph/(?P<pk>[0-9]+)/$', views.chart_view, name='graph'),
 ]
