@@ -16,7 +16,7 @@
     {% endif %}
 </div>
 {% for role in all_roles %}
-{% if user.is_authenticated and user.id == role.user.id and project.id == role.project.id %}
+{% if user.is_authenticated and user.id == role.user.id and project.id == role.project.id or project.id == user.project.id %}
 <div class="container-fluid">
     <a href="#demo" class="btn btn-info btn-block" data-toggle="collapse">Add New Issue</a>
     <div id="demo" class="collapse" >
